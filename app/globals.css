@@ -1,0 +1,102 @@
+:root {
+  /* Veggie Design Inspired Palette (Pink Edition) */
+  --color-primary: #E86A92;        /* Vibrant Pink */
+  --color-primary-light: #FFB6C1;  /* Soft Pink */
+  --color-primary-dark: #C84E6D;   /* Darker Pink */
+  
+  --color-accent: #FFD166;         /* Mustard Yellow (Ribbons/Highlights) */
+  --color-accent-2: #06D6A0;       /* Fresh Green (Leaf accents) */
+  
+  --color-background: #FFFBF5;     /* Warm Cream Background */
+  --color-surface: #FFFFFF;
+  
+  --color-text-main: #2C2C2C;      /* Soft Black */
+  --color-text-muted: #6B6B6B;     /* Gray */
+
+  /* Typography */
+  --font-main: var(--font-inter);
+  --font-heading: var(--font-fraunces);
+
+  /* Spacing */
+  --container-width: 1200px;
+  --container-padding: 2rem;
+  --header-height: 80px;
+}
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  font-family: var(--font-main);
+  background-color: var(--color-background);
+  color: var(--color-text-main);
+  line-height: 1.6;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--color-text-main);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+h1 { font-size: 4.5rem; line-height: 1.1; }
+h2 { font-size: 3rem; }
+h3 { font-size: 1.75rem; }
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.8em 2em;
+  border-radius: 50px;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  border: none;
+  font-size: 1rem;
+  font-family: var(--font-heading); /* Playful font on buttons */
+}
+
+.btn-primary {
+  background-color: var(--color-accent); /* Yellow button like "Download App" */
+  color: var(--color-text-main);
+}
+
+.btn-primary:hover {
+  transform: scale(1.05) rotate(-2deg);
+  box-shadow: 0 10px 20px rgba(255, 209, 102, 0.4);
+}
+
+.btn-outline {
+  border: 2px solid var(--color-text-main);
+  background: transparent;
+}
+
+/* Decorative CSS Shapes */
+.shape-circle {
+  border-radius: 50%;
+}
+
+.section-padding {
+  padding: 6rem 0;
+}
