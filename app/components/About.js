@@ -174,7 +174,7 @@ export default function About() {
           </span>
           <h2 style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>Más que una Nutri 🦦</h2>
           <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>
-            Soy una nutricionista con experiencia en nutrición integral y nutrición vegetariana. Mi objetivo es ayudarte a alcanzar tus metas de salud y bienestar.
+            Soy una nutricionista con experiencia en nutrición integral. Mi objetivo es ayudarte a alcanzar tus metas de salud y bienestar.
           </p>
         </motion.div>
 
