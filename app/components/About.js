@@ -264,7 +264,7 @@ export default function About() {
                 }}
             >
                 <FlaskConical size={32} color="#D84315" style={{ marginBottom: '1rem' }} />
-                <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#BF360C' }}>Fundadora Laboratorio Ideaslab</h4>
+                <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#BF360C' }}>Co-fundadora Laboratorio Ideaslab</h4>
                 <p style={{ opacity: 0.8, marginTop: '0.5rem', color: '#BF360C' }}>Innovación Alimentaria<br/>Universidad CES</p>
             </FloatingImageCard>
 
