@@ -90,7 +90,7 @@ export default function Hero() {
             bottom: '-10%',
             width: '500px',
             height: '400px',
-            background: 'url(/path/to/bowl.png) no-repeat center/contain', /* Fallback or add existing image */
+            background: 'url(/images/hero/bowl.png) no-repeat center/contain', /* Fallback or add existing image */
             zIndex: 2
         }}
       />

@@ -3,9 +3,11 @@
 import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Heart } from "lucide-react";
 
 export default function Navbar() {
+  const pathname = usePathname();
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
@@ -72,16 +74,27 @@ export default function Navbar() {
           </Link>
 
           {/* Nav Links */}
-          <nav style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }} className="desktop-nav">
+      <nav style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }} className="desktop-nav">
              {[
                { name: "Inicio", href: "/" },
+               { name: "Sobre Mí", href: "/#about" },
                { name: "Servicios", href: "/#services" },
                { name: "Recetas", href: "/recipes" },
                { name: "Blog", href: "/blog" },
-             ].map((link) => (
+             ].map((link) => {
+               const isActive = pathname === link.href;
+               // If we are on the homepage and the link is a hash link (e.g. /#about), 
+               // use just the hash (#about) to enable smooth scrolling.
+               // Otherwise use the full path.
+               let href = link.href;
+               if (pathname === '/' && link.href.startsWith('/#')) {
+                 href = link.href.substring(1); // removes the leading slash, leaving #about
+               }
+
+               return (
                <Link 
                  key={link.name} 
-                 href={link.href}
+                 href={href}
                  style={{ 
                    fontWeight: '600', 
                    fontSize: '0.95rem',
@@ -91,11 +104,11 @@ export default function Navbar() {
                >
                  {link.name}
                </Link>
-             ))}
+             )})}
           </nav>
 
           {/* CTA */}
-          <a href="https://calendar.google.com" target="_blank" className="btn btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.9rem' }}>
+          <a href="https://calendar.app.google/bCFxLUv3dstFdmkT6" target="_blank" className="btn btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.9rem' }}>
             Agendar Cita
           </a>
         </div>

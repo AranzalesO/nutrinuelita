@@ -41,7 +41,7 @@ export default function Services() {
             {servicesData.map((service, index) => (
               <a 
                 key={service.id}
-                href="https://calendar.google.com/calendar/u/0/r" 
+                href="https://calendar.app.google/bCFxLUv3dstFdmkT6" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 style={{ textDecoration: 'none' }}

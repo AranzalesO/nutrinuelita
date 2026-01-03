@@ -1,9 +1,12 @@
 'use client';
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Heart, Instagram, Facebook, Mail } from "lucide-react";
 
 export default function Footer() {
+  const pathname = usePathname();
+
   return (
     <footer className="footer-section">
       <div className="container">
@@ -24,10 +27,26 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Navegación</h4>
             <ul>
-              <li><Link href="/">Inicio</Link></li>
-              <li><Link href="/#services">Servicios</Link></li>
-              <li><Link href="/blog">Blog / Recetas</Link></li>
-              <li><Link href="#">Contacto</Link></li>
+                {[
+                  { name: "Inicio", href: "/" },
+                  { name: "Sobre Mí", href: "/#about" },
+                  { name: "Servicios", href: "/#services" },
+                  { name: "Recetas", href: "/recipes" },
+                  { name: "Blog", href: "/blog" },
+                ].map((link) => {
+                  // If we are on the homepage and the link is a hash link (e.g. /#about), 
+                  // use just the hash (#about) to enable smooth scrolling.
+                  let href = link.href;
+                  if (pathname === '/' && link.href.startsWith('/#')) {
+                    href = link.href.substring(1); 
+                  }
+                  
+                  return (
+                    <li key={link.name}>
+                      <Link href={href}>{link.name}</Link>
+                    </li>
+                  )
+                })}
             </ul>
           </div>
 
@@ -35,9 +54,9 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Sígueme</h4>
             <div className="social-links">
-              <a href="#" aria-label="Instagram"><Instagram size={20} /></a>
-              <a href="#" aria-label="Facebook"><Facebook size={20} /></a>
-              <a href="mailto:hola@nutrinuelita.com" aria-label="Email"><Mail size={20} /></a>
+              <a href="https://www.instagram.com/nutrinuelita/" target="_blank" aria-label="Instagram"><Instagram size={20} /></a>
+              <a href="https://www.facebook.com/profile.php?id=61584691671024" target="_blank" aria-label="Facebook"><Facebook size={20} /></a>
+              <a href="mailto:nutrinuelita@gmail.com" target="_blank" aria-label="Email"><Mail size={20} /></a>
             </div>
             
              <div className="legal-links">

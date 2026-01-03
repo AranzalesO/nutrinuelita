@@ -77,8 +77,8 @@ export default function CustomCursor() {
     >
       <Heart 
         size={24} 
-        fill={isHovering ? "#E86A92" : "white"} 
-        color={isHovering ? "#E86A92" : "white"}
+        fill={isHovering ? "#E86A92" : (isVisible && document.elementFromPoint(mouseX.get(), mouseY.get())?.closest('[data-cursor-light="true"]') ? "white" : "#E86A92")} 
+        color={isHovering ? "#E86A92" : (isVisible && document.elementFromPoint(mouseX.get(), mouseY.get())?.closest('[data-cursor-light="true"]') ? "white" : "#E86A92")}
         strokeWidth={1}
       />
     </motion.div>
