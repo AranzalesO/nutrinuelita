@@ -1,16 +1,17 @@
 'use client';
 
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Heart } from "lucide-react";
+import { Heart, Menu, X } from "lucide-react";
 
 export default function Navbar() {
   const pathname = usePathname();
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
@@ -107,12 +108,82 @@ export default function Navbar() {
              )})}
           </nav>
 
-          {/* CTA */}
-          <a href="https://calendar.app.google/bCFxLUv3dstFdmkT6" target="_blank" className="btn btn-primary" style={{ padding: '0.6rem 1.5rem', fontSize: '0.9rem' }}>
+          {/* Mobile Toggle */}
+          <button 
+            className="mobile-toggle"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            style={{
+              display: 'none', // Hidden by default, shown via CSS
+              background: 'none',
+              border: 'none',
+              cursor: 'pointer',
+              color: 'var(--color-primary)',
+              zIndex: 60
+            }}
+          >
+            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+          </button>
+
+          {/* CTA Desktop */}
+          <a href="https://calendar.app.google/bCFxLUv3dstFdmkT6" target="_blank" className="btn btn-primary desktop-cta" style={{ padding: '0.6rem 1.5rem', fontSize: '0.9rem' }}>
             Agendar Cita
           </a>
         </div>
       </div>
+
+      {/* Mobile Menu Overlay */}
+      <AnimatePresence>
+        {mobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            style={{
+              position: 'fixed',
+              top: '80px', // Below header
+              left: 0,
+              right: 0,
+              backgroundColor: '#FFFBF5',
+              padding: '2rem',
+              borderBottom: '2px solid var(--color-primary-light)',
+              zIndex: 49,
+              boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
+            }}
+          >
+            <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', textAlign: 'center' }}>
+               {[
+                 { name: "Inicio", href: "/" },
+                 { name: "Sobre Mí", href: "/#about" },
+                 { name: "Servicios", href: "/#services" },
+                 { name: "Recetas", href: "/recipes" },
+                 { name: "Blog", href: "/blog" },
+               ].map((link) => {
+                 let href = link.href;
+                 if (pathname === '/' && link.href.startsWith('/#')) {
+                   href = link.href.substring(1); 
+                 }
+                 return (
+                   <Link 
+                     key={link.name} 
+                     href={href}
+                     onClick={() => setMobileMenuOpen(false)}
+                     style={{ 
+                       fontWeight: '700', 
+                       fontSize: '1.2rem',
+                       color: 'var(--color-text-main)'
+                     }}
+                   >
+                     {link.name}
+                   </Link>
+                 )
+               })}
+               <a href="https://calendar.app.google/bCFxLUv3dstFdmkT6" target="_blank" className="btn btn-primary" style={{ marginTop: '1rem', width: '100%' }}>
+                 Agendar Cita
+               </a>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       {/* Styles for hover underline */}
       <style jsx global>{`
@@ -129,8 +200,9 @@ export default function Navbar() {
         .nav-link:hover::after {
           width: 100%;
         }
-        @media (max-width: 768px) {
-          .desktop-nav { display: none !important; }
+        @media (max-width: 900px) {
+          .desktop-nav, .desktop-cta { display: none !important; }
+          .mobile-toggle { display: block !important; }
         }
       `}</style>
     </motion.header>

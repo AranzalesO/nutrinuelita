@@ -13,7 +13,7 @@ export default function Services() {
       {/* Dark background for contrast, similar to the reference dark green but in dark coffee/rose tone */}
       
       <div className="container">
-        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '4rem', marginBottom: '4rem' }}>
+        <div className="services-header">
           <motion.h2 
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -35,9 +35,9 @@ export default function Services() {
         </div>
 
         {/* Info Box that follows/appears */}
-        <div style={{ position: 'relative', minHeight: '600px', display: 'grid', gridTemplateColumns: '2fr 1fr', gap: '2rem' }}>
+        <div className="services-layout">
           
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className="services-list" style={{ display: 'flex', flexDirection: 'column' }}>
             {servicesData.map((service, index) => (
               <a 
                 key={service.id}
@@ -47,22 +47,13 @@ export default function Services() {
                 style={{ textDecoration: 'none' }}
                 onMouseEnter={() => setHoveredService(service)}
                 onMouseLeave={() => setHoveredService(null)}
+                className="service-item-link"
               >
                 <motion.div 
                   initial={{ opacity: 0, y: 50 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.1, duration: 0.6 }}
                   viewport={{ once: true }}
-                  style={{
-                    display: 'grid',
-                    gridTemplateColumns: '0.5fr 3fr 1fr',
-                    alignItems: 'center',
-                    padding: '3rem 0',
-                    borderTop: '1px solid rgba(255,255,255,0.1)',
-                    cursor: 'pointer',
-                    color: hoveredService?.id === service.id ? '#E86A92' : '#FFFBF5',
-                    transition: 'color 0.3s'
-                  }}
                   className="service-row"
                 >
                   <span style={{ fontSize: '1.5rem', fontFamily: 'var(--font-heading)', color: 'var(--color-primary)' }}>
@@ -97,7 +88,7 @@ export default function Services() {
           </div>
 
           {/* Dynamic Details Box */}
-          <div style={{ position: 'relative' }}>
+          <div className="services-details">
             <AnimatePresence mode="wait">
               {hoveredService && (
                 <motion.div
@@ -107,14 +98,13 @@ export default function Services() {
                   exit={{ opacity: 0, x: 20 }}
                   transition={{ duration: 0.3 }}
                   style={{
-                    position: 'sticky',
-                    top: '2rem',
                     backgroundColor: '#E86A92',
                     padding: '3rem',
                     borderRadius: '30px',
                     color: 'white',
                     boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
                   }}
+                  className="sticky-card"
                 >
                   <h3 style={{ fontSize: '2.5rem', marginBottom: '1.5rem', color: '#FFFBF5' }}>
                     {hoveredService.title}
@@ -138,18 +128,13 @@ export default function Services() {
                       </motion.li>
                     ))}
                   </ul>
-                  {/* <div style={{ marginTop: '2rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                    <ArrowUpRight size={24} />
-                    Clic para agendar
-                  </div> */}
                 </motion.div>
               )}
             </AnimatePresence>
             
             {/* Default State / Placeholder when not hovering */}
             {!hoveredService && (
-               <div style={{ 
-                 position: 'sticky', top: '2rem', 
+               <div className="details-placeholder" style={{ 
                  display: 'flex', alignItems: 'center', justifyContent: 'center', height: '100%',
                  opacity: 0.1, color: '#E86A92'
                }}>
@@ -160,6 +145,72 @@ export default function Services() {
 
         </div>
       </div>
+
+      <style jsx>{`
+        .services-header {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            margin-bottom: 4rem;
+        }
+        .services-layout {
+            position: relative;
+            min-height: 600px;
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+        .service-row {
+            display: grid;
+            grid-template-columns: 0.5fr 3fr 1fr;
+            align-items: center;
+            padding: 3rem 0;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+            color: #FFFBF5;
+            transition: color 0.3s;
+        }
+        .sticky-card {
+            position: sticky;
+            top: 2rem;
+        }
+        .details-placeholder {
+            position: sticky;
+            top: 2rem;
+        }
+
+        @media (max-width: 900px) {
+            .services-header {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+            .services-layout {
+                grid-template-columns: 1fr;
+                display: flex;
+                flex-direction: column-reverse; /* Details on top/bottom? Or just stack normal. Let's stack details below list or create a modal. Actually, on mobile, hover doesn't exist. We should probably force the "Details" to show when clicking or just make them static. 
+                For now, let's just stack them. But "Hover" won't trigger. 
+                We need a "Click" fallback or just always show details. 
+                Ideally, mobile users should just click to go to the link? 
+                The current implementation links to Google Calendar directly. 
+                So the hover is just extra info. 
+                Let's hide the details column on mobile for V1 if it's just extra info, 
+                OR we show the details inline (accordion style) which requires code change.
+                
+                For this quick optimization: Let's keep the column layout but stacked. 
+                Users can tap roughly. 
+                */
+                display: block; 
+            }
+            .services-details {
+                display: none; /* Hiding details on mobile for now as interaction is hover-based and link is primary action */
+            }
+            .service-row {
+                grid-template-columns: 0.5fr 4fr 1fr;
+                padding: 2rem 0;
+            }
+        }
+      `}</style>
     </section>
   );
 }

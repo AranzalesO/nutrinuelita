@@ -5,16 +5,9 @@ import { Ribbon, VeggieCircle } from "./Graphics";
 
 export default function Hero() {
   return (
-    <section style={{ 
-      minHeight: '100vh', 
-      display: 'flex', 
-      alignItems: 'center', 
-      position: 'relative',
-      overflow: 'hidden',
-      paddingTop: '80px' 
-    }}>
+    <section className="hero-section">
       <div className="container" style={{ position: 'relative', zIndex: 5 }}>
-        <div style={{ maxWidth: '650px' }}>
+        <div className="hero-content" style={{ maxWidth: '650px' }}>
           
           <motion.div
              initial={{ opacity: 0, y: 20 }}
@@ -36,12 +29,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            style={{ 
-                color: '#1A4D2E', /* Dark Green Text for the "Fresh Feast" look */
-                textShadow: '2px 2px 0px rgba(232, 245, 233, 1)',
-                marginBottom: '1rem',
-                lineHeight: 0.95
-            }}
+            className="hero-title"
           >
             <span style={{ color: 'var(--color-primary)', fontSize: '1.2em', display: 'block', transform: 'rotate(-2deg)' }}>
               Nutrición
@@ -53,7 +41,7 @@ export default function Hero() {
             initial={{ opacity: 0, x: -30 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            style={{ fontSize: '1.25rem', color: 'var(--color-text-muted)', marginBottom: '2.5rem', maxWidth: '500px' }}
+            className="hero-description"
           >
             Disfruta de una vida más saludable con planes ricos en nutrientes, educación real y sin restricciones absurdas.
           </motion.p>
@@ -84,16 +72,78 @@ export default function Hero() {
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 1, delay: 0.3 }}
-        style={{ 
-            position: 'absolute',
-            right: '5%',
-            bottom: '-10%',
-            width: '500px',
-            height: '400px',
-            background: 'url(/images/hero/bowl.png) no-repeat center/contain', /* Fallback or add existing image */
-            zIndex: 2
-        }}
+        className="hero-image-container"
       />
+    
+      <style jsx>{`
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        .hero-title {
+            color: #1A4D2E;
+            text-shadow: 2px 2px 0px rgba(232, 245, 233, 1);
+            margin-bottom: 1rem;
+            line-height: 0.95;
+        }
+        .hero-description {
+            font-size: 1.25rem;
+            color: var(--color-text-muted);
+            margin-bottom: 2.5rem;
+            max-width: 500px;
+        }
+        .hero-image-container {
+            position: absolute;
+            right: 5%;
+            bottom: -5%;
+            width: 500px;
+            height: 400px;
+            background-image: url('/images/hero/bowl.png');
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: 2;
+        }
+
+        @media (max-width: 900px) {
+            .hero-section {
+                flex-direction: column;
+                justify-content: center;
+                text-align: center;
+                padding-top: 120px;
+                padding-bottom: 4rem;
+            }
+            .hero-content {
+                margin: 0 auto;
+                z-index: 10;
+            }
+            .hero-title {
+                font-size: 0.8rem; /* Scaled down via ems in children */
+            }
+            .hero-description {
+                margin: 0 auto 2rem auto;
+            }
+            .hero-image-container {
+                position: relative;
+                width: 100%;
+                max-width: 300px;
+                height: 300px;
+                right: auto;
+                bottom: auto;
+                margin: 2rem auto 0 auto;
+            }
+            /* Hide some decorative elements on mobile to reduce clutter */
+            /* We can target them if we passed classNames, but for now they are absolute. 
+               Let's rely on overflow hidden, but maybe scale them down? 
+               Since they are components, we can't easily select them here without a wrapper.
+               However, usually overflow:Hidden on section handles it.
+            */
+        }
+      `}</style>
     </section>
   );
 }
