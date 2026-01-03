@@ -26,7 +26,7 @@ export default function AppShowcase() {
              style={{ zIndex: 2 }}
           >
             <h2 style={{ fontSize: '3rem', marginBottom: '1.5rem', color: '#33691E' }}>
-              Tu Nutrióloga <br/> en tu Bolsillo
+              Tu Nutricionista <br/> en tu Bolsillo
             </h2>
             <p style={{ fontSize: '1.2rem', marginBottom: '2.5rem', opacity: 0.9, color: '#33691E' }}>
               Accede a tus planes, recetas y lista de compras desde mi app exclusiva para pacientes.

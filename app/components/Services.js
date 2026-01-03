@@ -32,7 +32,7 @@ export default function Services() {
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          {servicesData.slice(0, 4).map((service, index) => (
+          {servicesData.map((service, index) => (
             <motion.div 
               key={service.id}
               initial={{ opacity: 0, y: 50 }}

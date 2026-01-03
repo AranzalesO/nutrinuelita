@@ -76,8 +76,8 @@ export default function Hero() {
 
       {/* CSS "Food" Shapes - Abstract representations */}
       <VeggieCircle color="#A5D6A7" size="400px" right="-5%" top="10%" delay={0.2} /> {/* Big Green Leaf */}
-      <VeggieCircle color="#FFCCBC" size="150px" right="30%" top="5%" delay={0.4} />  /* Peach */
-      <VeggieCircle color="#FFF59D" size="200px" right="10%" bottom="10%" delay={0.5} /> /* Lemon */
+      <VeggieCircle color="#FFCCBC" size="150px" right="30%" top="5%" delay={0.4} />  {/* Peach */}
+      <VeggieCircle color="#FFF59D" size="200px" right="10%" bottom="10%" delay={0.5} /> {/* Lemon */}
 
       {/* Image Placeholder if user wants real food images later */}
       <motion.div

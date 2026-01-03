@@ -67,7 +67,7 @@ export default function Navbar() {
             alignItems: 'center',
             gap: '0.5rem'
           }}>
-            <Heart fill="var(--color-primary)" size={24} />
+            <span style={{ fontSize: '2rem' }}>🦦</span>
             NutriNuelita
           </Link>
 
@@ -75,7 +75,7 @@ export default function Navbar() {
           <nav style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }} className="desktop-nav">
              {[
                { name: "Inicio", href: "/" },
-               { name: "Servicios", href: "#services" },
+               { name: "Servicios", href: "/#services" },
                { name: "Blog / Recetas", href: "/blog" },
              ].map((link) => (
                <Link 
