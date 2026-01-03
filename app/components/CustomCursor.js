@@ -7,6 +7,7 @@ import { Heart } from 'lucide-react';
 export default function CustomCursor() {
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isMounted, setIsMounted] = useState(false); // Fix hydration mismatch
   
   // Use MotionValues for performance
   const mouseX = useMotionValue(0);
@@ -18,6 +19,7 @@ export default function CustomCursor() {
   const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
+    setIsMounted(true);
     const moveCursor = (e) => {
       mouseX.set(e.clientX - 12); // Center the heart (24px width / 2)
       mouseY.set(e.clientY - 12);
@@ -52,7 +54,7 @@ export default function CustomCursor() {
   }, [mouseX, mouseY, isVisible]);
 
   // Don't render on touch devices or server-side
-  if (typeof window === 'undefined') return null;
+  if (!isMounted) return null;
 
   return (
     <motion.div
@@ -69,7 +71,7 @@ export default function CustomCursor() {
       }}
       animate={{
         scale: isHovering ? 1.5 : 1,
-        rotate: isHovering ? 10 : -10 // Slight wiggle on hover
+        rotate: isHovering ? 150 : -10 // Slight wiggle on hover
       }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >

@@ -76,7 +76,8 @@ export default function Navbar() {
              {[
                { name: "Inicio", href: "/" },
                { name: "Servicios", href: "/#services" },
-               { name: "Blog / Recetas", href: "/blog" },
+               { name: "Recetas", href: "/recipes" },
+               { name: "Blog", href: "/blog" },
              ].map((link) => (
                <Link 
                  key={link.name} 

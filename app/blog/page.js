@@ -2,16 +2,8 @@
 
 import Navbar from "../components/Navbar";
 import { motion } from "framer-motion";
-import { Search } from "lucide-react";
-
-const recipes = [
-  { id: 1, title: "Smoothie Verde Detox", category: "Bebidas", color: "#A5D6A7" },
-  { id: 2, title: "Bowl de Avena y Berries", category: "Desayuno", color: "#F48FB1" },
-  { id: 3, title: "Ensalada Mediterránea", category: "Almuerzo", color: "#FFF59D" },
-  { id: 4, title: "Galletas de Almendra", category: "Snack", color: "#FFCCBC" },
-  { id: 5, title: "Tostadas de Aguacate", category: "Desayuno", color: "#C5E1A5" },
-  { id: 6, title: "Cena Ligera de Pollo", category: "Cena", color: "#FFAB91" },
-];
+import Link from 'next/link';
+import { posts } from "../data/posts";
 
 export default function Blog() {
   return (
@@ -20,110 +12,70 @@ export default function Blog() {
       
       <div className="container" style={{ paddingTop: '150px', paddingBottom: '4rem' }}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          style={{ textAlign: 'center', marginBottom: '4rem' }}
+           initial={{ opacity: 0, y: 20 }}
+           animate={{ opacity: 1, y: 0 }}
+           style={{ textAlign: 'center', marginBottom: '4rem' }}
         >
           <span style={{ 
             fontFamily: 'var(--font-heading)', 
             color: 'var(--color-primary)', 
             fontSize: '1.2rem',
-            display: 'block', marginBottom: '1rem'
+            marginBottom: '1rem', display: 'block'
           }}>
-            Cocina Saludable
+            Blog & Artículos
           </span>
-          <h1 style={{ marginBottom: '2rem', fontSize: '3.5rem' }}>Recetas & Tips</h1>
-          
-          {/* Search Bar */}
-          <div style={{ 
-            maxWidth: '500px', margin: '0 auto', 
-            position: 'relative'
-          }}>
-            <input 
-              type="text" 
-              placeholder="Buscar recetas (ej. Desayuno, Vegano...)"
-              style={{
-                width: '100%', padding: '1rem 1.5rem', borderRadius: '50px',
-                border: '2px solid rgba(0,0,0,0.1)', fontSize: '1rem',
-                backgroundColor: 'white',
-                outline: 'none'
-              }}
-            />
-            <button style={{ 
-              position: 'absolute', right: '10px', top: '50%', transform: 'translateY(-50%)',
-              background: 'var(--color-primary)', border: 'none', borderRadius: '50%',
-              width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center',
-              color: 'white', cursor: 'pointer'
-            }}>
-              <Search size={18} />
-            </button>
-          </div>
+          <h1 style={{ fontSize: '3.5rem' }}>Bienestar al Día</h1>
         </motion.div>
 
-        {/* Categories Pills */}
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '4rem', flexWrap: 'wrap' }}>
-          {['Todas', 'Desayunos', 'Almuerzos', 'Cenas', 'Snacks', 'Bebidas'].map((cat, i) => (
-             <button key={cat} style={{
-               padding: '0.5rem 1.5rem',
-               borderRadius: '30px',
-               border: i === 0 ? 'none' : '1px solid #ddd',
-               backgroundColor: i === 0 ? 'var(--color-text-main)' : 'transparent',
-               color: i === 0 ? 'white' : 'var(--color-text-main)',
-               cursor: 'pointer',
-               fontFamily: 'var(--font-heading)'
-             }}>
-               {cat}
-             </button>
-          ))}
-        </div>
-
-        {/* Recipes Grid */}
-        <div style={{ 
-          display: 'grid', 
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', 
-          gap: '2.5rem' 
-        }}>
-          {recipes.map((recipe, i) => (
-            <motion.div
-              key={recipe.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              viewport={{ once: true }}
-              style={{ cursor: 'pointer' }}
-              whileHover={{ y: -10 }}
-            >
-              <div style={{ 
-                height: '350px', 
-                backgroundColor: recipe.color, 
-                borderRadius: '20px', 
-                position: 'relative',
-                marginBottom: '1rem',
-                overflow: 'hidden'
-              }}>
-                {/* CSS composition representing food */}
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
+          {posts.map((post, i) => (
+            <Link key={post.id} href={`/blog/${post.id}`} style={{ textDecoration: 'none' }}>
+              <motion.article
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ delay: i * 0.1 }}
+                viewport={{ once: true }}
+                whileHover={{ y: -5 }}
+                style={{ cursor: 'pointer' }}
+              >
                 <div style={{
-                  position: 'absolute', bottom: '-20px', right: '-20px',
-                  width: '150px', height: '150px',
-                  background: 'rgba(255,255,255,0.4)',
-                  borderRadius: '50%'
-                }} />
+                  height: '250px',
+                  backgroundColor: post.imageColor,
+                  borderRadius: '20px',
+                  marginBottom: '1.5rem',
+                  position: 'relative',
+                  overflow: 'hidden'
+                }}>
+                  <div style={{
+                    position: 'absolute', bottom: '-20px', right: '-20px',
+                    width: '100px', height: '100px',
+                    background: 'rgba(255,255,255,0.3)',
+                    borderRadius: '50%'
+                  }} />
+                </div>
+                
+                <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.6 }}>
+                   <span>{post.category}</span>
+                   <span>•</span>
+                   <span>{post.date}</span>
+                </div>
+                
+                <h2 style={{ fontSize: '1.8rem', marginBottom: '0.5rem', color: 'var(--color-text-main)' }}>
+                  {post.title}
+                </h2>
+                
+                <p style={{ opacity: 0.8, lineHeight: '1.6', color: 'var(--color-text-main)' }}>
+                  {post.excerpt}
+                </p>
                 
                 <span style={{ 
-                  position: 'absolute', top: '20px', left: '20px', 
-                  background: 'white', padding: '0.3rem 0.8rem', 
-                  borderRadius: '20px', fontSize: '0.8rem', fontWeight: 'bold'
+                  display: 'inline-block', marginTop: '1rem', 
+                  color: 'var(--color-primary)', fontWeight: 'bold' 
                 }}>
-                  {recipe.category}
+                  Leer más →
                 </span>
-              </div>
-              <h3 style={{ fontSize: '1.5rem' }}>{recipe.title}</h3>
-              <div style={{ display: 'flex', gap: '1rem', fontSize: '0.9rem', color: '#666', marginTop: '0.5rem' }}>
-                <span>15 min</span>
-                <span>•</span>
-                <span>Fácil</span>
-              </div>
-            </motion.div>
+              </motion.article>
+            </Link>
           ))}
         </div>
       </div>
