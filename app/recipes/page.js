@@ -112,13 +112,25 @@ export default function Recipes() {
                   marginBottom: '1rem',
                   overflow: 'hidden'
                 }}>
-                  {/* CSS composition representing food */}
-                  <div style={{
-                    position: 'absolute', bottom: '-20px', right: '-20px',
-                    width: '150px', height: '150px',
-                    background: 'rgba(255,255,255,0.4)',
-                    borderRadius: '50%'
-                  }} />
+                  {/* Image or CSS composition */}
+                  {recipe.imageUrl ? (
+                    <img 
+                      src={recipe.imageUrl} 
+                      alt={recipe.title}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover'
+                      }}
+                    />
+                  ) : (
+                    <div style={{
+                      position: 'absolute', bottom: '-20px', right: '-20px',
+                      width: '150px', height: '150px',
+                      background: 'rgba(255,255,255,0.4)',
+                      borderRadius: '50%'
+                    }} />
+                  )}
                   
                   <span style={{ 
                     position: 'absolute', top: '20px', left: '20px', 

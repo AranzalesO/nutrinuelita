@@ -43,7 +43,7 @@ export default function AppShowcase() {
             </ul>
 
             <button className="btn" style={{ backgroundColor: '#33691E', color: 'white', padding: '1rem 2rem' }}>
-              Conocer la App →
+              Conocer la App (Próximamente) →
             </button>
           </motion.div>
           
