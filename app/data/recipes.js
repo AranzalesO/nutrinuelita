@@ -37,13 +37,13 @@ export const recipes = [
     description: "Desayuno completo con fibra y vitaminas, ideal para mantenerte saciado.",
     ingredients: [
       "1/2 taza de avena en hojuelas",
-      "1 taza de leche vegetal (bebida de almendras, soya o avena)",
+      "1 taza de ¿bebida de almendras, soya o avena",
       "1 cucharada de semillas de chía",
       "Fresas y arándanos al gusto",
       "Miel o stevia para endulzar"
     ],
     instructions: [
-      "En una olla pequeña, cocina la avena con la leche a fuego medio.",
+      "En una olla pequeña, cocina la avena con la bebida a fuego medio.",
       "Revuelve constantemente hasta que espese (aprox. 5-7 min).",
       "Sirve en un bowl y agrega la fruta fresca encima.",
       "Decora con semillas de chía y un toque de miel."
