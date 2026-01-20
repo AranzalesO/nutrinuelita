@@ -265,12 +265,12 @@ export default function About() {
             >
                 <FlaskConical size={32} color="#D84315" style={{ marginBottom: '1rem' }} />
                 <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#BF360C' }}>Co-fundadora Laboratorio Ideaslab</h4>
-                <p style={{ opacity: 0.8, marginTop: '0.5rem', color: '#BF360C' }}>Innovación Alimentaria<br/>Universidad CES</p>
+                <p style={{ opacity: 0.8, marginTop: '0.5rem', color: '#BF360C' }}>Innovación en Educación Alimentaria y Nutricional<br/>Universidad CES</p>
             </FloatingImageCard>
 
             {/* Mayor's Office */}
             <FloatingImageCard 
-                imageSrc="/images/about/medellin.jpg"
+                imageSrc="/images/about/san-rafael.jpg"
                 delay={0.3}
                 style={{ 
                     gridColumn: 'span 4',
@@ -282,7 +282,8 @@ export default function About() {
             >
                 <Building2 size={32} color="#455A64" style={{ marginBottom: '1rem' }} />
                 <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#37474F' }}>Impacto Público</h4>
-                <p style={{ opacity: 0.8, marginTop: '0.5rem', color: '#37474F' }}>Alcaldía de Medellín<br/>Proyectos de Ciudad</p>
+                <p style={{ opacity: 0.8, marginTop: '0.5rem', color: '#37474F' }}><b>Alcaldía de Medellín</b><br/>Desarrollo de proyectos con la alcaldía de Medellín, también en
+proyectos rurales con Fundación Aurelio Llano posada y E.S.E Hospital San Rafael de Yolombó</p>
             </FloatingImageCard>
 
              {/* Liderazgo - Updated Colors */}
@@ -298,8 +299,8 @@ export default function About() {
                  }}
              >
                  <Award size={32} color="#BF360C" style={{ marginBottom: '0.5rem' }} />
-                 <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#BF360C' }}>Liderazgo</h4>
-                 <p style={{ opacity: 0.9, marginTop: '0.5rem', color: '#BF360C', fontWeight: '500' }}>Transformando la nutrición</p>
+                 <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#BF360C' }}>Liderazgo público</h4>
+                 <p style={{ opacity: 0.9, marginTop: '0.5rem', color: '#BF360C', fontWeight: '500' }}>Diplomado Referentes (Universidad EIA – Alcaldía de Medellín)</p>
              </FloatingImageCard>
 
         </div>

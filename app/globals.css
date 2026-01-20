@@ -240,8 +240,24 @@ h3 {
   .social-links {
     justify-content: center;
   }
+}
 
-  .tagline {
-    margin: 0 auto;
-  }
+/* Blog Content Typography */
+.blog-content h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.blog-content p {
+  margin-bottom: 1.5rem;
+}
+
+.blog-content ul {
+  margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  padding-left: 1.5rem;
+}
+
+.blog-content li {
+  margin-bottom: 0.5rem;
 }

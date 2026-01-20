@@ -18,7 +18,7 @@ export default function Hero() {
                fontFamily: 'var(--font-heading)', 
                color: 'var(--color-primary)', 
                fontSize: '1.5rem',
-               marginBottom: '0.5rem',
+               marginBottom: '1.5rem',
                display: 'block'
              }}>
                #1 Nutrición Integral en Medellín
@@ -51,7 +51,7 @@ export default function Hero() {
              animate={{ scale: 1, opacity: 1 }}
              transition={{ duration: 0.5, delay: 0.6 }}
           >
-            <a href="#services" className="btn btn-primary" style={{ padding: '1rem 3rem', fontSize: '1.2rem', boxShadow: '0 8px 0px #E0B030' }}>
+            <a href="#services" className="btn btn-primary" style={{ padding: '1rem 3rem', marginTop: '1rem', fontSize: '1.2rem', boxShadow: '0 8px 0px #E0B030' }}>
               Empezar Ahora →
             </a>
           </motion.div>
@@ -87,8 +87,8 @@ export default function Hero() {
         .hero-title {
             color: #1A4D2E;
             text-shadow: 2px 2px 0px rgba(232, 245, 233, 1);
-            margin-bottom: 1rem;
-            line-height: 0.95;
+            margin-bottom: 2rem;
+            line-height: 1.1;
         }
         .hero-description {
             font-size: 1.25rem;

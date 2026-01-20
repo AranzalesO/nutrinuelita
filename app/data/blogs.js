@@ -35,7 +35,7 @@ export const blogs = [
     description: "Desayuno completo con fibra y vitaminas, ideal para mantenerte saciado.",
     ingredients: [
       "1/2 taza de avena en hojuelas",
-      "1 taza de leche vegetal (almendra, soya o avena)",
+      "1 taza de leche vegetal (bebida de almendras, soya o avena)",
       "1 cucharada de semillas de chía",
       "Fresas y arándanos al gusto",
       "Miel o stevia para endulzar"
@@ -60,15 +60,15 @@ export const blogs = [
       "Mix de lechugas",
       "Tomates cherry",
       "Aceitunas negras",
-      "Queso feta",
+      "Queso de tu preferencia",
       "Pepino",
-      "Aceite de oliva extra virgen",
+      "Aceite de oliva",
       "Orégano"
     ],
     instructions: [
       "Corta los vegetales en cubos o rodajas.",
       "Mezcla en un bowl grande junto con las lechugas.",
-      "Agrega el queso feta desmenuzado y las aceitunas.",
+      "Agrega el queso desmenuzado y las aceitunas.",
       "Adereza con aceite de oliva, sal, pimienta y orégano al gusto."
     ]
   },

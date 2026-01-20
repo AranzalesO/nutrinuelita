@@ -13,8 +13,8 @@ export const recipes = [
       "1 manzana verde",
       "1/2 pepino",
       "Jugó de 1 limón",
-      "1 taza de agua o agua de coco",
-      "Jengibre al gusto"
+      "1 taza de agua",
+      "Jengibre al gusto (opcional)"
     ],
     instructions: [
       "Lava bien todos los ingredientes.",
@@ -35,7 +35,7 @@ export const recipes = [
     description: "Desayuno completo con fibra y vitaminas, ideal para mantenerte saciado.",
     ingredients: [
       "1/2 taza de avena en hojuelas",
-      "1 taza de leche vegetal (almendra, soya o avena)",
+      "1 taza de leche vegetal (bebida de almendras, soya o avena)",
       "1 cucharada de semillas de chía",
       "Fresas y arándanos al gusto",
       "Miel o stevia para endulzar"
@@ -83,8 +83,8 @@ export const recipes = [
     description: "Un snack saludable sin harinas refinadas.",
     ingredients: [
       "1 taza de harina de almendra",
-      "2 cucharadas de aceite de coco",
-      "2 cucharadas de miel de maple",
+      "2 cucharadas de aceite de canola, girasol o de oliva",
+      "2 cucharadas de miel de abeja 100% pura o Stevia si es de su preferencia",
       "1 cucharadita de esencia de vainilla",
       "Chispas de chocolate oscuro (opcional)"
     ],

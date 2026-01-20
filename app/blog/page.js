@@ -46,12 +46,24 @@ export default function Blog() {
                   position: 'relative',
                   overflow: 'hidden'
                 }}>
-                  <div style={{
-                    position: 'absolute', bottom: '-20px', right: '-20px',
-                    width: '100px', height: '100px',
-                    background: 'rgba(255,255,255,0.3)',
-                    borderRadius: '50%'
-                  }} />
+                  {post.imageUrl ? (
+                    <img 
+                      src={post.imageUrl} 
+                      alt={post.title}
+                      style={{
+                        width: '100%',
+                        height: '100%',
+                        objectFit: 'cover'
+                      }}
+                    />
+                  ) : (
+                    <div style={{
+                      position: 'absolute', bottom: '-20px', right: '-20px',
+                      width: '100px', height: '100px',
+                      background: 'rgba(255,255,255,0.3)',
+                      borderRadius: '50%'
+                    }} />
+                  )}
                 </div>
                 
                 <div style={{ display: 'flex', gap: '1rem', marginBottom: '0.5rem', fontSize: '0.9rem', opacity: 0.6 }}>

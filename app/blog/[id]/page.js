@@ -54,25 +54,30 @@ export default function BlogPost() {
             
             <div style={{ 
               height: '400px', backgroundColor: post.imageColor, borderRadius: '30px', marginBottom: '3rem',
-              position: 'relative'
+              position: 'relative', overflow: 'hidden'
             }}>
-               {/* Decorative Circle */}
-               <div style={{
-                  position: 'absolute', bottom: '-50px', right: '-50px',
-                  width: '200px', height: '200px',
-                  background: 'rgba(255,255,255,0.2)',
-                  borderRadius: '50%'
-               }} />
+               {/* Decorative Circle or Image */ }
+               {post.imageUrl ? (
+                 <img 
+                   src={post.imageUrl} 
+                   alt={post.title}
+                   style={{
+                     width: '100%',
+                     height: '100%',
+                     objectFit: 'cover'
+                   }}
+                 />
+               ) : (
+                 <div style={{
+                    position: 'absolute', bottom: '-50px', right: '-50px',
+                    width: '200px', height: '200px',
+                    background: 'rgba(255,255,255,0.2)',
+                    borderRadius: '50%'
+                 }} />
+               )}
             </div>
             
-            <div style={{ fontSize: '1.2rem', lineHeight: '1.8' }}>
-              <p>{post.content}</p>
-              <br/>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-              </p>
-            </div>
+            <div className="blog-content" style={{ fontSize: '1.2rem', lineHeight: '1.8' }} dangerouslySetInnerHTML={{ __html: post.content }} />
           </motion.div>
       </div>
     </main>
