@@ -7,6 +7,7 @@ import { Search } from "lucide-react";
 import { useState } from 'react';
 import { recipes } from "../data/recipes";
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Recipes() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -114,12 +115,12 @@ export default function Recipes() {
                 }}>
                   {/* Image or CSS composition */}
                   {recipe.imageUrl ? (
-                    <img 
+                    <Image 
                       src={recipe.imageUrl} 
                       alt={recipe.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       style={{
-                        width: '100%',
-                        height: '100%',
                         objectFit: 'cover'
                       }}
                     />

@@ -2,6 +2,7 @@
 
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { ArrowLeft, Calendar, Tag } from 'lucide-react';
 import Navbar from '../../components/Navbar';
@@ -58,12 +59,13 @@ export default function BlogPost() {
             }}>
                {/* Decorative Circle or Image */ }
                {post.imageUrl ? (
-                 <img 
+                 <Image 
                    src={post.imageUrl} 
                    alt={post.title}
+                   fill
+                   sizes="(max-width: 800px) 100vw, 800px"
+                   priority
                    style={{
-                     width: '100%',
-                     height: '100%',
                      objectFit: 'cover'
                    }}
                  />
