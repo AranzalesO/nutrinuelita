@@ -77,7 +77,7 @@ export const posts = [
         <li><strong>Fatiga</strong> = menos actividad física y menor gasto energético.</li>
         <li>Cambios en el cerebro que favorecen elegir alimentos altos en azúcar, grasa o calorías.</li>
       </ul>
-      <p>El sueño impacta tu peso porque regula hormonas clave del hambre, mantiene un metabolismo saludable, ayuda a gestionar el azúcar en sangre y evita comportamientos que favorecen comer en exceso. Dormir menos interrumpe estos procesos y puede llevar a ganar peso con el tiempo.</p>
+      <p>El sueño impacta en tu peso porque regula hormonas clave del hambre, mantiene un metabolismo saludable, ayuda a gestionar el azúcar en sangre y evita comportamientos que favorecen comer en exceso. Dormir menos interrumpe estos procesos y puede llevar a ganar peso con el tiempo.</p>
     `
   },
   {
