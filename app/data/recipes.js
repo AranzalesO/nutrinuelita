@@ -37,7 +37,7 @@ export const recipes = [
     description: "Desayuno completo con fibra y vitaminas, ideal para mantenerte saciado.",
     ingredients: [
       "1/2 taza de avena en hojuelas",
-      "1 taza de ¿bebida de almendras, soya o avena",
+      "1 taza de bebida de almendras, soya o avena",
       "1 cucharada de semillas de chía",
       "Fresas y arándanos al gusto",
       "Miel o stevia para endulzar"
@@ -139,7 +139,7 @@ export const recipes = [
       "Calabacín",
       "Pimiento rojo",
       "Cebolla morada",
-      "Soya baja en sodio",
+      "Soya",
       "Ajo en polvo"
     ],
     instructions: [

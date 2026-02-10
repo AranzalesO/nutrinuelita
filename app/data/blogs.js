@@ -1,7 +1,7 @@
 export const blogs = [
   { 
     id: 1, 
-    title: "Smoothie Verde", 
+    title: "Smoothie verde", 
     category: "Bebidas", 
     color: "#A5D6A7",
     duration: "5 min",
@@ -26,7 +26,7 @@ export const blogs = [
   },
   { 
     id: 2, 
-    title: "Bowl de Avena y Berries", 
+    title: "Bowl de avena y berries", 
     category: "Desayuno", 
     color: "#F48FB1",
     duration: "10 min",
@@ -49,7 +49,7 @@ export const blogs = [
   },
   { 
     id: 3, 
-    title: "Ensalada Mediterránea", 
+    title: "Ensalada mediterránea", 
     category: "Almuerzo", 
     color: "#FFF59D",
     duration: "15 min",
@@ -74,7 +74,7 @@ export const blogs = [
   },
   { 
     id: 4, 
-    title: "Galletas de Almendra", 
+    title: "Galletas de almendra", 
     category: "Snack", 
     color: "#FFCCBC",
     duration: "25 min",
@@ -98,7 +98,7 @@ export const blogs = [
   },
   { 
     id: 5, 
-    title: "Tostadas de Aguacate", 
+    title: "Tostadas de aguacate", 
     category: "Desayuno", 
     color: "#C5E1A5",
     duration: "10 min",
@@ -121,7 +121,7 @@ export const blogs = [
   },
   { 
     id: 6, 
-    title: "Cena Ligera de Pollo", 
+    title: "Cena ligera de pollo", 
     category: "Cena", 
     color: "#FFAB91",
     duration: "20 min",

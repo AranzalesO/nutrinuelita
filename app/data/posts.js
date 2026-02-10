@@ -1,7 +1,7 @@
 export const posts = [
   {
     id: 1,
-    title: "5 Habitos para Mejorar tu Digestión",
+    title: "5 hábitos para mejorar tu digestión",
     excerpt: "Pequeños cambios en tu rutina diaria que harán una gran diferencia en cómo te sientes.",
     category: "Salud",
     date: "2 Ene 2026",
@@ -33,7 +33,7 @@ export const posts = [
   },
   {
     id: 2,
-    title: "¿Por qué el Sueño Impacta tu Peso?",
+    title: "¿Por qué el sueño impacta en tu peso?",
     excerpt: "La relación oculta entre dormir bien y mantener un peso saludable.",
     category: "Bienestar",
     date: "28 Dic 2025",
@@ -82,7 +82,7 @@ export const posts = [
   },
   {
     id: 3,
-    title: "Alimentación Consciente: Más allá del Plato",
+    title: "Alimentación consciente: más allá del plato",
     excerpt: "Aprende a escuchar a tu cuerpo y disfrutar la comida sin culpa.",
     category: "Mindfulness",
     date: "15 Dic 2025",

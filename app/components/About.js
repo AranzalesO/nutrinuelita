@@ -1,7 +1,7 @@
 'use client';
 
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Globe, FlaskConical, Building2, Award } from 'lucide-react';
+import { Globe, FlaskConical, Building2, Award, GraduationCap } from 'lucide-react';
 import { useRef } from 'react';
 
 // Helper component for Floating Image Hover Effect
@@ -174,7 +174,7 @@ export default function About() {
           </span>
           <h2 style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>Más que una Nutri 🦦</h2>
           <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>
-            Soy una nutricionista con experiencia en nutrición integral. Mi objetivo es ayudarte a alcanzar tus metas de salud y bienestar.
+            Investigación Social y Clínica, Investigación en Educación Alimentaria y Nutricional, apasionada por la Educación Alimentaria y Nutricional, Salud Pública, Salud Global y Salud Planetaria; proyectos de política alimentaria e inocuidad de los alimentos; exposoma social y mecanismos de enfermedades cardio metabólicas, epidemiología y bioestadística; enfoques del curso de vida; y escritura académica.
           </p>
         </motion.div>
 
@@ -300,7 +300,24 @@ proyectos rurales con Fundación Aurelio Llano posada y E.S.E Hospital San Rafae
              >
                  <Award size={32} color="#BF360C" style={{ marginBottom: '0.5rem' }} />
                  <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#BF360C' }}>Liderazgo público</h4>
-                 <p style={{ opacity: 0.9, marginTop: '0.5rem', color: '#BF360C', fontWeight: '500' }}>Diplomado Referentes (Universidad EIA – Alcaldía de Medellín)</p>
+                 <p style={{ opacity: 0.9, marginTop: '0.5rem', color: '#BF360C', fontWeight: '500' }}>Diplomado Referentes (Universidad EIA – Alcaldía de Medellín) <br/> Diplomado en Salud Pública</p>
+             </FloatingImageCard>
+
+             {/* Liderazgo - Updated Colors */}
+             <FloatingImageCard 
+                 imageSrc="/images/about/liderazgo.jpg"
+                 delay={0.4}
+                 style={{ 
+                     gridColumn: 'span 4',
+                     backgroundColor: '#91b2ffff', // Darker Peach/Orange for better contrast
+                     borderRadius: '30px',
+                     padding: '2rem',
+                     display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center'
+                 }}
+             >
+                 <GraduationCap size={32} color="#BF360C" style={{ marginBottom: '0.5rem' }} />
+                 <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#BF360C' }}>Investigadora</h4>
+                 <p style={{ opacity: 0.9, marginTop: '0.5rem', color: '#BF360C', fontWeight: '500' }}>Cofundadora y miembro activo del grupo de investigación Exposomas del Imperial College - CES y universidades del exterior</p>
              </FloatingImageCard>
 
         </div>
