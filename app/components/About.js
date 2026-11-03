@@ -2,7 +2,8 @@
 
 import Image from 'next/image';
 import { motion, useMotionValue, useSpring } from 'framer-motion';
-import { Globe, FlaskConical, Building2, Award, GraduationCap, Camera } from 'lucide-react';
+import { Globe, FlaskConical, Building2, Award, GraduationCap, Camera, Linkedin, ArrowUpRight } from 'lucide-react';
+import { SOCIAL } from '../lib/site';
 import styles from './About.module.css';
 
 // Card that reveals a floating photo which follows the pointer
@@ -129,7 +130,7 @@ export default function About() {
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
           >
-            <span className="eyebrow">Conoce a Manuela Acevedo</span>
+            <span className="eyebrow">Conoce a Manuela Acevedo Álvarez</span>
             <h2 className={styles.title}>
               Más que una <span style={{ whiteSpace: 'nowrap' }}><span className="serif-accent">nutri</span> 🦦</span>
             </h2>
@@ -180,7 +181,7 @@ export default function About() {
               <div className={styles.portrait}>
                 <Image
                   src="/images/about/main-bio.jpg"
-                  alt="Manuela Acevedo"
+                  alt="Retrato de Manuela Acevedo Álvarez, Nutricionista Dietista"
                   fill
                   sizes="170px"
                   style={{ objectFit: 'cover', objectPosition: '50% 15%' }}
@@ -196,6 +197,9 @@ export default function About() {
                   Mi enfoque une la evidencia científica con el disfrute de la vida.
                 </p>
                 <p className={styles.signature}>— Manuela Acevedo Álvarez</p>
+                <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer me" className={styles.linkedin}>
+                  <Linkedin size={16} /> Ver perfil en LinkedIn <ArrowUpRight size={15} />
+                </a>
               </div>
             </div>
           </FloatingImageCard>

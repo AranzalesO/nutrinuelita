@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
-import { Heart, Instagram, Facebook, Mail, ArrowUp } from "lucide-react";
+import { Heart, Instagram, Facebook, Linkedin, Mail, ArrowUp } from "lucide-react";
+import { SOCIAL } from "../lib/site";
 import styles from "./Footer.module.css";
 
 const LINKS = [
@@ -57,6 +58,7 @@ export default function Footer() {
             <div className={styles.social}>
               <a href="https://www.instagram.com/nutrinuelita/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><Instagram size={20} /></a>
               <a href="https://www.facebook.com/profile.php?id=61584691671024" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><Facebook size={20} /></a>
+              <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer me" aria-label="LinkedIn de Manuela Acevedo Álvarez"><Linkedin size={20} /></a>
               <a href="mailto:nutrinuelita@gmail.com" aria-label="Email"><Mail size={20} /></a>
             </div>
             <ul className={styles.legal}>
@@ -79,7 +81,7 @@ export default function Footer() {
         </motion.div>
 
         <div className={styles.bottom}>
-          <span>© {year} NutriNuelita · Manuela Acevedo, Nutricionista Dietista</span>
+          <span>© {year} NutriNuelita · Manuela Acevedo Álvarez, Nutricionista Dietista</span>
           <span className={styles.made}>Hecho con <Heart size={14} fill="currentColor" /> en Medellín</span>
           <button
             className={styles.toTop}

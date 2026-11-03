@@ -71,13 +71,18 @@ export const events = [
     title: "Liderazgo para la salud pública",
     type: "Conferencia",
     modality: "Presencial",
-    start: "2026-06-12T09:00:00-05:00",
-    end: "2026-06-12T13:00:00-05:00",
+    start: "2025-10-23T12:00:00-05:00",
+    hideTime: true, // no mostramos hora porque no está registrada
+    hideHost: true, // sin la tarjeta "Facilitó" en este evento
     location: "Medellín",
     tone: "pink",
     image: "/images/about/medellin.jpg",
-    summary: "Participé en el encuentro de jóvenes líderes del programa de la Alcaldía de Medellín.",
-    recap:
-      "Conversamos sobre seguridad alimentaria y políticas públicas con líderes de la ciudad, y sobre el papel de la nutrición en la salud de las comunidades.",
+    summary:
+      "Hablamos de seguridad alimentaria como un derecho: que todas las personas tengan acceso, en todo momento, a alimentos suficientes, nutritivos y culturalmente adecuados para llevar una vida sana.",
+    recap: `Abordamos la seguridad alimentaria desde sus cuatro dimensiones: la disponibilidad de alimentos, el acceso físico y económico a ellos, su aprovechamiento biológico (que el cuerpo realmente pueda nutrirse de lo que come) y la estabilidad de todo lo anterior en el tiempo, incluso frente a crisis económicas o climáticas.
+
+Revisamos cómo la inseguridad alimentaria no se limita al hambre: convive con la malnutrición en todas sus formas, desde la desnutrición y las deficiencias de micronutrientes hasta el sobrepeso, la obesidad y las enfermedades cardiometabólicas. Por eso las soluciones no pueden quedarse solo en el plato; también dependen del entorno en el que vivimos, de lo que cuesta comer bien y de la información con la que tomamos decisiones.
+
+Conversamos sobre el papel de las políticas públicas para garantizar este derecho: los programas de alimentación escolar, el fortalecimiento de los circuitos cortos de comercialización con productores locales y campesinos, la reducción de pérdidas y desperdicios de alimentos y la educación alimentaria y nutricional como herramienta para construir sistemas alimentarios más justos, saludables y sostenibles en la ciudad.`,
   },
 ];

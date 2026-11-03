@@ -67,7 +67,7 @@ export default function FeaturedEvent({ event, priority = false }) {
         <p className={styles.featuredSummary}>{event.summary}</p>
 
         <ul className={styles.featuredMeta}>
-          <li><Clock size={16} /> {timeRange(event)}</li>
+          {timeRange(event) && <li><Clock size={16} /> {timeRange(event)}</li>}
           <li><ModalityIcon modality={event.modality} size={16} /> {event.location}{event.city && event.city !== 'Online' ? `, ${event.city}` : ''}</li>
         </ul>
 

@@ -120,7 +120,10 @@ export default function EventDetail() {
             {(event.description || event.recap) && (
               <section className={d.block}>
                 <h2 className={d.blockTitle}>{isPast ? 'Así lo vivimos' : 'Sobre el evento'}</h2>
-                <p className={d.text}>{isPast && event.recap ? event.recap : event.description}</p>
+                {/* A blank line in the text starts a new paragraph */}
+                {((isPast && event.recap) || event.description || event.recap).split(/\n\s*\n/).map((para, i) => (
+                  <p key={i} className={d.text}>{para.trim()}</p>
+                ))}
                 {event.audience && !isPast && (
                   <p className={d.audience}><Users size={18} /> <span><strong>¿Para quién?</strong> {event.audience}</span></p>
                 )}
@@ -159,16 +162,18 @@ export default function EventDetail() {
               </section>
             )}
 
+            {!event.hideHost && (
             <section className={`${d.block} ${d.host}`}>
               <div className={d.hostPhoto}>
-                <Image src="/images/about/main-bio.jpg" alt="Manuela Acevedo" fill sizes="88px" style={{ objectFit: 'cover', objectPosition: '50% 15%' }} />
+                <Image src="/images/about/main-bio.jpg" alt="Manuela Acevedo Álvarez" fill sizes="88px" style={{ objectFit: 'cover', objectPosition: '50% 15%' }} />
               </div>
               <div>
                 <span className={d.hostKicker}>{isPast ? 'Facilitó' : 'Facilita'}</span>
-                <p className={d.hostName}>Manuela Acevedo</p>
+                <p className={d.hostName}>Manuela Acevedo Álvarez</p>
                 <p className={d.hostBio}>Nutricionista Dietista · Global Shaper (WEF) · Investigadora del grupo Exposomas, Imperial College – CES.</p>
               </div>
             </section>
+            )}
           </div>
 
           {/* ───── Sticky ticket ───── */}
@@ -193,7 +198,7 @@ export default function EventDetail() {
               <div className={d.ticketBody}>
                 <ul className={d.facts}>
                   <li><CalendarDays size={17} /> <span>{date.long}</span></li>
-                  <li><Clock size={17} /> <span>{timeRange(event)}</span></li>
+                  {timeRange(event) && <li><Clock size={17} /> <span>{timeRange(event)}</span></li>}
                   <li><ModalityIcon modality={event.modality} size={17} /> <span>{event.location}{event.city && event.city !== 'Online' ? `, ${event.city}` : ''}</span></li>
                 </ul>
 
@@ -248,7 +253,7 @@ export default function EventDetail() {
           >
             <span className={d.mobileBarInfo}>
               <strong>{event.price}</strong>
-              <span>{date.day} {date.month} · {timeRange(event)}</span>
+              <span>{date.day} {date.month}{timeRange(event) ? ` · ${timeRange(event)}` : ''}</span>
             </span>
             <a
               href={registrationHref(event)}

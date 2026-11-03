@@ -72,6 +72,10 @@
   color: var(--color-ink-soft);
 }
 
+.text + .text {
+  margin-top: 1.1rem;
+}
+
 .audience {
   display: flex;
   align-items: flex-start;

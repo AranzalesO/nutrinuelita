@@ -4,7 +4,8 @@ import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ArrowRight, Instagram } from "lucide-react";
+import { Menu, X, ArrowRight, Instagram, Linkedin } from "lucide-react";
+import { SOCIAL } from "../lib/site";
 import { getUpcomingEvents } from "../lib/events";
 import { useNow } from "../lib/useNow";
 import styles from "./Navbar.module.css";
@@ -159,6 +160,9 @@ export default function Navbar() {
               </a>
               <a href="https://www.instagram.com/nutrinuelita/" target="_blank" rel="noopener noreferrer" className={styles.mobileSocial}>
                 <Instagram size={18} /> @nutrinuelita
+              </a>
+              <a href={SOCIAL.linkedin} target="_blank" rel="noopener noreferrer me" className={styles.mobileSocial}>
+                <Linkedin size={18} /> Manuela Acevedo Álvarez
               </a>
             </motion.div>
           </motion.div>

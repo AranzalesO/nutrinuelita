@@ -79,7 +79,7 @@ export default function EventTicket({ event, index = 0, past = false }) {
           <div className={styles.ticketBody}>
             <h3 className={styles.ticketTitle}>{event.title}</h3>
             <ul className={styles.meta}>
-              <li><Clock size={14} /> {timeRange(event)}</li>
+              {timeRange(event) && <li><Clock size={14} /> {timeRange(event)}</li>}
               <li><ModalityIcon modality={event.modality} /> {event.modality} · {event.location}</li>
             </ul>
             {!past && <SpotsBar event={event} />}

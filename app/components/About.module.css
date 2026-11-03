@@ -194,6 +194,27 @@
   opacity: 0.9;
 }
 
+.linkedin {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.25rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 700;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.4s var(--ease-spring);
+}
+
+.linkedin:hover {
+  background: white;
+  color: var(--color-primary-dark);
+  transform: translateY(-2px);
+}
+
 /* Secondary cards */
 .cardTop {
   display: flex;

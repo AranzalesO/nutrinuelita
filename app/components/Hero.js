@@ -60,7 +60,7 @@ export default function Hero() {
             transition={{ duration: 0.6 }}
           >
             <span className={styles.pillDot} />
-            Nutricionista Dietista · Medellín
+            Manuela Acevedo Álvarez · Nutricionista Dietista en Medellín
           </motion.span>
 
           <h1 className={styles.title}>
@@ -134,7 +134,7 @@ export default function Hero() {
             <motion.div style={{ y: photoY }} className={styles.archInner}>
               <Image
                 src="/images/about/main-bio.jpg"
-                alt="Manuela Acevedo, nutricionista de NutriNuelita"
+                alt="Manuela Acevedo Álvarez, Nutricionista Dietista en Medellín y creadora de NutriNuelita"
                 fill
                 priority
                 sizes="(max-width: 900px) 80vw, 440px"

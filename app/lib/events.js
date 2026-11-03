@@ -51,6 +51,7 @@ export function dateParts(iso) {
 }
 
 export function timeRange(event) {
+  if (event.hideTime) return null;
   const t = fmt({ hour: "numeric", minute: "2-digit", hour12: true });
   const start = t.format(new Date(event.start));
   return event.end ? `${start} – ${t.format(new Date(event.end))}` : start;
