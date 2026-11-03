@@ -73,7 +73,7 @@ export const events = [
     modality: "Presencial",
     start: "2026-06-12T09:00:00-05:00",
     end: "2026-06-12T13:00:00-05:00",
-    location: "Alcaldía de Medellín",
+    location: "Medellín",
     tone: "pink",
     image: "/images/about/medellin.jpg",
     summary: "Participé en el encuentro de jóvenes líderes del programa de la Alcaldía de Medellín.",
