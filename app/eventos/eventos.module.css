@@ -1,0 +1,118 @@
+.main {
+  --notch-bg: var(--color-background);
+  min-height: 100vh;
+  padding-bottom: clamp(4rem, 8vw, 6rem);
+  background-color: var(--color-background);
+  background-image:
+    radial-gradient(ellipse 50% 30% at 100% 0%, rgba(255, 182, 193, 0.35), transparent 70%),
+    radial-gradient(ellipse 40% 25% at 0% 20%, rgba(197, 225, 165, 0.35), transparent 70%);
+  background-repeat: no-repeat;
+}
+
+.hero {
+  padding-top: clamp(140px, 18vw, 180px);
+  padding-bottom: 2.5rem;
+}
+
+.title {
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 400;
+  letter-spacing: -0.045em;
+  line-height: 0.95;
+  margin-bottom: 1.5rem;
+}
+
+.stats {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: white;
+  border: 1px solid var(--color-border);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.stats strong {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  color: var(--color-ink);
+}
+
+.statDot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--color-primary);
+}
+
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 2.5rem;
+  padding: 0.35rem;
+  width: fit-content;
+  max-width: 100%;
+  border-radius: 999px;
+  background: white;
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-sm);
+}
+
+.filter {
+  position: relative;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--color-ink-soft);
+  cursor: pointer;
+  transition: color 0.25s ease;
+}
+
+.filter:hover {
+  color: var(--color-ink);
+}
+
+.filterActive {
+  color: white;
+}
+
+.filterActive:hover {
+  color: white;
+}
+
+.filterPill {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--color-ink);
+}
+
+.filterLabel {
+  position: relative;
+  z-index: 1;
+}
+
+.empty {
+  margin-top: 2rem;
+}
+
+.past {
+  margin-top: 2rem;
+}
+
+.talkWrap {
+  margin-top: clamp(4rem, 8vw, 6rem);
+}
+
+@media (max-width: 560px) {
+  .filters {
+    border-radius: 22px;
+  }
+}

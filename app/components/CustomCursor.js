@@ -5,10 +5,11 @@ import { motion, useMotionValue, useSpring } from 'framer-motion';
 import { Heart } from 'lucide-react';
 
 export default function CustomCursor() {
+  const [enabled, setEnabled] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [isMounted, setIsMounted] = useState(false); // Fix hydration mismatch
-  
+  const [isLight, setIsLight] = useState(false);
+
   // Use MotionValues for performance
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -18,46 +19,57 @@ export default function CustomCursor() {
   const cursorX = useSpring(mouseX, springConfig);
   const cursorY = useSpring(mouseY, springConfig);
 
+  // Only take over the cursor on devices with a real mouse
   useEffect(() => {
-    setIsMounted(true);
+    const query = window.matchMedia('(hover: hover) and (pointer: fine)');
+    const update = () => {
+      setEnabled(query.matches);
+      document.documentElement.classList.toggle('has-custom-cursor', query.matches);
+    };
+    update();
+    query.addEventListener('change', update);
+    return () => {
+      query.removeEventListener('change', update);
+      document.documentElement.classList.remove('has-custom-cursor');
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!enabled) return;
+
     const moveCursor = (e) => {
       mouseX.set(e.clientX - 12); // Center the heart (24px width / 2)
       mouseY.set(e.clientY - 12);
-      if (!isVisible) setIsVisible(true);
+      setIsVisible(true);
     };
 
     const handleMouseOver = (e) => {
-      if (
-        e.target.tagName.toLowerCase() === 'a' ||
-        e.target.tagName.toLowerCase() === 'button' ||
-        e.target.closest('a') ||
-        e.target.closest('button') ||
-        e.target.getAttribute('role') === 'button'
-      ) {
-        setIsHovering(true);
-      }
+      const target = e.target;
+      if (!(target instanceof Element)) return;
+      setIsHovering(Boolean(target.closest('a, button, [role="button"], input, select, textarea, label')));
+      setIsLight(Boolean(target.closest('[data-cursor-light="true"]')));
     };
 
-    const handleMouseOut = (e) => {
-        setIsHovering(false);
-    };
+    const handleLeave = () => setIsVisible(false);
 
     window.addEventListener('mousemove', moveCursor);
     window.addEventListener('mouseover', handleMouseOver);
-    window.addEventListener('mouseout', handleMouseOut);
+    document.addEventListener('mouseleave', handleLeave);
 
     return () => {
       window.removeEventListener('mousemove', moveCursor);
       window.removeEventListener('mouseover', handleMouseOver);
-      window.removeEventListener('mouseout', handleMouseOut);
+      document.removeEventListener('mouseleave', handleLeave);
     };
-  }, [mouseX, mouseY, isVisible]);
+  }, [enabled, mouseX, mouseY]);
 
-  // Don't render on touch devices or server-side
-  if (!isMounted) return null;
+  if (!enabled) return null;
+
+  const color = isLight && !isHovering ? '#FFFFFF' : '#E86A92';
 
   return (
     <motion.div
+      aria-hidden="true"
       style={{
         position: 'fixed',
         left: 0,
@@ -66,8 +78,9 @@ export default function CustomCursor() {
         y: cursorY,
         pointerEvents: 'none',
         zIndex: 9999,
-        display: isVisible ? 'flex' : 'none',
-        mixBlendMode: 'difference' // Cool effect over different backgrounds
+        display: 'flex',
+        opacity: isVisible ? 1 : 0,
+        filter: 'drop-shadow(0 2px 6px rgba(42, 26, 31, 0.18))'
       }}
       animate={{
         scale: isHovering ? 1.5 : 1,
@@ -75,12 +88,7 @@ export default function CustomCursor() {
       }}
       transition={{ type: "spring", stiffness: 300, damping: 20 }}
     >
-      <Heart 
-        size={24} 
-        fill={isHovering ? "#E86A92" : (isVisible && document.elementFromPoint(mouseX.get(), mouseY.get())?.closest('[data-cursor-light="true"]') ? "white" : "#E86A92")} 
-        color={isHovering ? "#E86A92" : (isVisible && document.elementFromPoint(mouseX.get(), mouseY.get())?.closest('[data-cursor-light="true"]') ? "white" : "#E86A92")}
-        strokeWidth={1}
-      />
+      <Heart size={24} fill={color} color={color} strokeWidth={1} />
     </motion.div>
   );
 }

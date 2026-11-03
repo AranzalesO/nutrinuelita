@@ -1,0 +1,206 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 1.5rem 0;
+  transition: padding 0.35s var(--ease-out);
+}
+
+.header.scrolled {
+  padding: 0.75rem 0;
+}
+
+.bar {
+  position: relative;
+  z-index: 61;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 0.6rem 0.6rem 0.6rem 1.4rem;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  transition: background-color 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, backdrop-filter 0.35s ease;
+}
+
+.scrolled .bar {
+  background-color: rgba(255, 251, 245, 0.78);
+  backdrop-filter: saturate(1.4) blur(14px);
+  -webkit-backdrop-filter: saturate(1.4) blur(14px);
+  border-color: rgba(42, 26, 31, 0.06);
+  box-shadow: 0 10px 30px -12px rgba(42, 26, 31, 0.15);
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-brand);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--color-primary);
+}
+
+.logoMark {
+  display: inline-block;
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.desktopNav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.3rem;
+  border-radius: 999px;
+}
+
+.navLink {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.navLink:hover {
+  color: var(--color-ink);
+  background-color: rgba(232, 106, 146, 0.1);
+}
+
+.navLink.active {
+  color: var(--color-ink);
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 0.25rem;
+  width: 0;
+  height: 2px;
+  border-radius: 2px;
+  background-color: var(--color-accent);
+  transform: translateX(-50%);
+  transition: width 0.3s var(--ease-out);
+}
+
+.navLink:hover::after,
+.navLink.active::after {
+  width: 1.2rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { box-shadow: 0 0 0 0 rgba(232, 106, 146, 0.6); }
+  70% { box-shadow: 0 0 0 7px rgba(232, 106, 146, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(232, 106, 146, 0); }
+}
+
+.cta {
+  padding: 0.75rem 1.35rem;
+  font-size: 0.9rem;
+}
+
+.toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: none;
+  background: var(--color-ink);
+  color: var(--color-background);
+  cursor: pointer;
+}
+
+.mobileMenu {
+  position: fixed;
+  inset: 0;
+  z-index: 49;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 7.5rem var(--container-padding) 2rem;
+  background-color: var(--color-background);
+  background-image:
+    radial-gradient(circle at 100% 0%, rgba(232, 106, 146, 0.18), transparent 45%),
+    radial-gradient(circle at 0% 100%, rgba(197, 225, 165, 0.45), transparent 50%);
+  overflow-y: auto;
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+}
+
+.mobileLink {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  font-family: var(--font-heading);
+  font-size: clamp(2.2rem, 9vw, 3rem);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--color-ink);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.mobileIndex {
+  font-family: var(--font-main);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--color-primary);
+}
+
+.mobileFooter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-top: 2rem;
+}
+
+.mobileSocial {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+@media (max-width: 1080px) {
+  .navLink {
+    padding: 0.55rem 0.7rem;
+  }
+}
+
+@media (max-width: 960px) {
+  .desktopNav,
+  .cta {
+    display: none;
+  }
+
+  .toggle {
+    display: inline-flex;
+  }
+}

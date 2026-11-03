@@ -81,7 +81,7 @@ export default function Recipes() {
                  backgroundColor: activeCategory === cat ? 'var(--color-primary)' : 'transparent',
                  color: activeCategory === cat ? 'white' : 'var(--color-text-main)',
                  cursor: 'pointer',
-                 fontFamily: 'var(--font-heading)',
+                 fontWeight: 600,
                  transition: 'all 0.3s'
                }}>
                {cat}

@@ -1,10 +1,35 @@
 'use client';
 
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Heart, Menu, X } from "lucide-react";
+import { Menu, X, ArrowRight, Instagram } from "lucide-react";
+import { getUpcomingEvents } from "../lib/events";
+import { useNow } from "../lib/useNow";
+import styles from "./Navbar.module.css";
+
+export const BOOKING_URL = "https://calendar.app.google/bCFxLUv3dstFdmkT6";
+
+const NAV_LINKS = [
+  { name: "Inicio", href: "/" },
+  { name: "Sobre Mí", href: "/#about" },
+  { name: "Servicios", href: "/#services" },
+  { name: "Eventos", href: "/eventos", badge: true },
+  { name: "Recetas", href: "/recipes" },
+  { name: "Blog", href: "/blog" },
+];
+
+// On the homepage, "/#about" becomes "#about" so the browser smooth-scrolls
+function resolveHref(href, pathname) {
+  return pathname === '/' && href.startsWith('/#') ? href.substring(1) : href;
+}
+
+function isActive(href, pathname) {
+  if (href === '/') return pathname === '/';
+  if (href.startsWith('/#')) return false;
+  return pathname.startsWith(href);
+}
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -12,21 +37,21 @@ export default function Navbar() {
   const [hidden, setHidden] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const now = useNow();
+  // The pulsing dot on "Eventos" only makes sense when something is coming up
+  const hasUpcoming = Boolean(now) && getUpcomingEvents(now).length > 0;
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const previous = scrollY.getPrevious();
-    if (latest > previous && latest > 150) {
-      setHidden(true);
-    } else {
-      setHidden(false);
-    }
-    
-    if (latest > 50) {
-      setScrolled(true);
-    } else {
-      setScrolled(false);
-    }
+    setHidden(!mobileMenuOpen && latest > previous && latest > 150);
+    setScrolled(latest > 50);
   });
+
+  // Lock page scroll behind the mobile menu
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [mobileMenuOpen]);
 
   const variants = {
     visible: { y: 0, opacity: 1 },
@@ -34,177 +59,111 @@ export default function Navbar() {
   };
 
   return (
+    <>
     <motion.header
       variants={variants}
       animate={hidden ? "hidden" : "visible"}
       transition={{ ease: [0.1, 0.25, 0.3, 1], duration: 0.6 }}
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 50,
-        padding: scrolled ? '1rem 0' : '2rem 0',
-        transition: 'padding 0.3s ease'
-      }}
+      className={`${styles.header} ${scrolled ? styles.scrolled : ''}`}
     >
       <div className="container">
-        <div style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          backgroundColor: scrolled ? 'rgba(255, 255, 255, 0.8)' : 'transparent',
-          backdropFilter: scrolled ? 'blur(10px)' : 'none',
-          padding: '0.8rem 2rem',
-          borderRadius: '50px',
-          boxShadow: scrolled ? '0 4px 20px rgba(0,0,0,0.05)' : 'none',
-          transition: 'all 0.3s ease'
-        }}>
-          {/* Logo */}
-          <Link href="/" style={{ 
-            fontSize: '1.5rem', 
-            fontFamily: 'var(--font-heading)', 
-            fontWeight: '800', 
-            color: 'var(--color-primary)',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.5rem'
-          }}>
-            <span style={{ fontSize: '2rem' }}>🦦</span>
-            NutriNuelita
+        <div className={styles.bar}>
+          <Link href="/" className={styles.logo} aria-label="NutriNuelita, inicio">
+            <motion.span
+              className={styles.logoMark}
+              whileHover={{ rotate: [0, -14, 10, -6, 0] }}
+              transition={{ duration: 0.6 }}
+            >
+              🦦
+            </motion.span>
+            <span>NutriNuelita</span>
           </Link>
 
-          {/* Nav Links */}
-      <nav style={{ display: 'flex', gap: '2.5rem', alignItems: 'center' }} className="desktop-nav">
-             {[
-               { name: "Inicio", href: "/" },
-               { name: "Sobre Mí", href: "/#about" },
-               { name: "Servicios", href: "/#services" },
-               { name: "Recetas", href: "/recipes" },
-               { name: "Blog", href: "/blog" },
-             ].map((link) => {
-               const isActive = pathname === link.href;
-               // If we are on the homepage and the link is a hash link (e.g. /#about), 
-               // use just the hash (#about) to enable smooth scrolling.
-               // Otherwise use the full path.
-               let href = link.href;
-               if (pathname === '/' && link.href.startsWith('/#')) {
-                 href = link.href.substring(1); // removes the leading slash, leaving #about
-               }
-
-               return (
-               <Link 
-                 key={link.name} 
-                 href={href}
-                 style={{ 
-                   fontWeight: '600', 
-                   fontSize: '0.95rem',
-                   position: 'relative'
-                 }}
-                 className="nav-link"
-               >
-                 {link.name}
-               </Link>
-             )})}
+          <nav className={styles.desktopNav} aria-label="Principal">
+            {NAV_LINKS.map((link) => (
+              <Link
+                key={link.name}
+                href={resolveHref(link.href, pathname)}
+                className={`${styles.navLink} ${isActive(link.href, pathname) ? styles.active : ''}`}
+              >
+                {link.name}
+                {link.badge && hasUpcoming && <span className={styles.dot} aria-hidden="true" />}
+              </Link>
+            ))}
           </nav>
 
-          {/* Mobile Toggle */}
-          <button 
-            className="mobile-toggle"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            style={{
-              display: 'none', // Hidden by default, shown via CSS
-              background: 'none',
-              border: 'none',
-              cursor: 'pointer',
-              color: 'var(--color-primary)',
-              zIndex: 60
-            }}
-          >
-            {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-
-          {/* CTA Desktop */}
-          <a href="https://calendar.app.google/bCFxLUv3dstFdmkT6" target="_blank" className="btn btn-primary desktop-cta" style={{ padding: '0.6rem 1.5rem', fontSize: '0.9rem' }}>
-            Agendar Cita
+          <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className={`btn btn-dark ${styles.cta}`}>
+            Agendar cita <span className="btn-arrow"><ArrowRight size={16} /></span>
           </a>
+
+          <button
+            className={styles.toggle}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label={mobileMenuOpen ? "Cerrar menú" : "Abrir menú"}
+            aria-expanded={mobileMenuOpen}
+          >
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={mobileMenuOpen ? 'x' : 'menu'}
+                initial={{ rotate: -90, opacity: 0 }}
+                animate={{ rotate: 0, opacity: 1 }}
+                exit={{ rotate: 90, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                style={{ display: 'flex' }}
+              >
+                {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              </motion.span>
+            </AnimatePresence>
+          </button>
         </div>
       </div>
+    </motion.header>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Menu Overlay — rendered outside the (transformed) header so `position: fixed` covers the viewport */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            style={{
-              position: 'fixed',
-              top: '80px', // Below header
-              left: 0,
-              right: 0,
-              backgroundColor: '#FFFBF5',
-              padding: '2rem',
-              borderBottom: '2px solid var(--color-primary-light)',
-              zIndex: 49,
-              boxShadow: '0 10px 30px rgba(0,0,0,0.1)'
-            }}
+            className={styles.mobileMenu}
+            initial={{ clipPath: 'circle(0% at calc(100% - 44px) 44px)' }}
+            animate={{ clipPath: 'circle(150% at calc(100% - 44px) 44px)' }}
+            exit={{ clipPath: 'circle(0% at calc(100% - 44px) 44px)' }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
           >
-            <nav style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', textAlign: 'center' }}>
-               {[
-                 { name: "Inicio", href: "/" },
-                 { name: "Sobre Mí", href: "/#about" },
-                 { name: "Servicios", href: "/#services" },
-                 { name: "Recetas", href: "/recipes" },
-                 { name: "Blog", href: "/blog" },
-               ].map((link) => {
-                 let href = link.href;
-                 if (pathname === '/' && link.href.startsWith('/#')) {
-                   href = link.href.substring(1); 
-                 }
-                 return (
-                   <Link 
-                     key={link.name} 
-                     href={href}
-                     onClick={() => setMobileMenuOpen(false)}
-                     style={{ 
-                       fontWeight: '700', 
-                       fontSize: '1.2rem',
-                       color: 'var(--color-text-main)'
-                     }}
-                   >
-                     {link.name}
-                   </Link>
-                 )
-               })}
-               <a href="https://calendar.app.google/bCFxLUv3dstFdmkT6" target="_blank" className="btn btn-primary" style={{ marginTop: '1rem', width: '100%' }}>
-                 Agendar Cita
-               </a>
+            <nav className={styles.mobileNav} aria-label="Menú móvil">
+              {NAV_LINKS.map((link, i) => (
+                <motion.div
+                  key={link.name}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.15 + i * 0.05, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <Link
+                    href={resolveHref(link.href, pathname)}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={styles.mobileLink}
+                  >
+                    <span className={styles.mobileIndex}>0{i + 1}</span>
+                    {link.name}
+                  </Link>
+                </motion.div>
+              ))}
             </nav>
+            <motion.div
+              className={styles.mobileFooter}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.5 }}
+            >
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn btn-primary" style={{ width: '100%' }}>
+                Agendar cita <span className="btn-arrow"><ArrowRight size={18} /></span>
+              </a>
+              <a href="https://www.instagram.com/nutrinuelita/" target="_blank" rel="noopener noreferrer" className={styles.mobileSocial}>
+                <Instagram size={18} /> @nutrinuelita
+              </a>
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-      
-      {/* Styles for hover underline */}
-      <style jsx global>{`
-        .nav-link::after {
-          content: '';
-          position: absolute;
-          width: 0;
-          height: 2px;
-          bottom: -4px;
-          left: 0;
-          background-color: var(--color-accent);
-          transition: width 0.3s ease;
-        }
-        .nav-link:hover::after {
-          width: 100%;
-        }
-        @media (max-width: 900px) {
-          .desktop-nav, .desktop-cta { display: none !important; }
-          .mobile-toggle { display: block !important; }
-        }
-      `}</style>
-    </motion.header>
+    </>
   );
 }

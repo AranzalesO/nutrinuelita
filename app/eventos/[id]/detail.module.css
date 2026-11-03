@@ -1,0 +1,447 @@
+.main {
+  --notch-bg: var(--color-background);
+  min-height: 100vh;
+  background-color: var(--color-background);
+  background-image: radial-gradient(ellipse 60% 35% at 100% 0%, var(--tone-bg), transparent 70%);
+  background-repeat: no-repeat;
+}
+
+.wrap {
+  padding-top: clamp(130px, 16vw, 160px);
+  padding-bottom: clamp(4rem, 8vw, 6rem);
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  color: var(--color-ink-soft);
+  transition: gap 0.3s var(--ease-out), color 0.3s ease;
+}
+
+.back:hover {
+  gap: 0.8rem;
+  color: var(--color-primary-dark);
+}
+
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 380px;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+
+.title {
+  margin: 1.25rem 0 1.25rem;
+  font-size: clamp(2.4rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+}
+
+.summary {
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  max-width: 640px;
+}
+
+.cover {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  margin-top: 2.5rem;
+  border-radius: 28px;
+  overflow: hidden;
+  background: var(--tone-bg);
+}
+
+.block {
+  margin-top: 3.5rem;
+}
+
+.blockTitle {
+  margin-bottom: 1.25rem;
+  font-size: 1.75rem;
+  font-style: italic;
+}
+
+.text {
+  font-size: 1.08rem;
+  line-height: 1.75;
+  color: var(--color-ink-soft);
+}
+
+.audience {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-top: 1.5rem;
+  padding: 1.1rem 1.25rem;
+  border-radius: 18px;
+  background: var(--tone-bg);
+  color: var(--tone-ink);
+  line-height: 1.5;
+}
+
+.audience svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.timeline {
+  position: relative;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0.9rem;
+  bottom: 0.9rem;
+  left: 5.35rem;
+  width: 2px;
+  background: repeating-linear-gradient(to bottom, var(--tone-solid) 0 6px, transparent 6px 12px);
+  opacity: 0.5;
+}
+
+.timeline li {
+  position: relative;
+  display: grid;
+  grid-template-columns: 4.5rem 1.7rem minmax(0, 1fr);
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.75rem 0;
+}
+
+.timelineTime {
+  font-family: var(--font-heading);
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--tone-ink);
+}
+
+.timelineDot {
+  position: relative;
+  z-index: 1;
+  width: 14px;
+  height: 14px;
+  margin-left: 0.2rem;
+  border-radius: 50%;
+  background: var(--color-background);
+  border: 3px solid var(--tone-solid);
+}
+
+.timelineTitle {
+  padding: 0.85rem 1.1rem;
+  border-radius: 16px;
+  background: white;
+  border: 1px solid var(--color-border);
+  font-weight: 600;
+  color: var(--color-ink);
+}
+
+.takeaways {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+  gap: 0.75rem;
+}
+
+.takeaways li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.1rem;
+  border-radius: 18px;
+  background: white;
+  border: 1px solid var(--color-border);
+  font-weight: 600;
+}
+
+.takeCheck {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--tone-solid);
+  color: white;
+}
+
+.host {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 24px;
+  background: white;
+  border: 1px solid var(--color-border);
+}
+
+.hostPhoto {
+  position: relative;
+  flex-shrink: 0;
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid var(--color-primary-light);
+}
+
+.hostKicker {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-primary-dark);
+}
+
+.hostName {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  line-height: 1.2;
+  color: var(--color-ink);
+}
+
+.hostBio {
+  font-size: 0.92rem;
+  color: var(--color-text-muted);
+}
+
+/* ───── Sticky ticket ───── */
+.aside {
+  position: sticky;
+  top: 110px;
+}
+
+.ticket {
+  border-radius: 28px;
+  background: white;
+  box-shadow: var(--shadow-lg);
+}
+
+.ticketHead {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.6rem 1.75rem;
+  border-radius: 28px 28px 0 0;
+  background: var(--tone-solid);
+  color: white;
+}
+
+.ticketDay {
+  font-family: var(--font-heading);
+  font-size: 4.2rem;
+  line-height: 0.8;
+  letter-spacing: -0.05em;
+}
+
+.ticketMonth {
+  display: block;
+  font-size: 0.85rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.ticketWeekday {
+  display: block;
+  font-family: var(--font-heading);
+  font-style: italic;
+  text-transform: capitalize;
+  opacity: 0.9;
+}
+
+.ticketIcon {
+  margin-left: auto;
+  opacity: 0.6;
+  transform: rotate(-20deg);
+}
+
+.ticketBody {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.6rem 1.75rem 1.75rem;
+}
+
+.facts {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-ink-soft);
+}
+
+.facts li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.7rem;
+}
+
+.facts span::first-letter {
+  text-transform: uppercase;
+}
+
+.facts svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--tone-solid);
+}
+
+.priceRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.9rem 0;
+  border-top: 1px dashed var(--color-border);
+  border-bottom: 1px dashed var(--color-border);
+  font-size: 0.9rem;
+  color: var(--color-text-muted);
+}
+
+.priceRow strong {
+  font-family: var(--font-heading);
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.cd {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.cd > div {
+  justify-content: space-between;
+}
+
+.cd > div > div {
+  flex: 1;
+  min-width: 0;
+}
+
+.cdLabel {
+  font-family: var(--font-heading);
+  font-style: italic;
+  color: var(--tone-ink);
+}
+
+.reserve {
+  width: 100%;
+}
+
+.secondary {
+  display: flex;
+  gap: 0.6rem;
+}
+
+.shareBtn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.75rem;
+  border-radius: 999px;
+  border: 1.5px solid var(--color-border);
+  background: transparent;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--color-ink);
+  cursor: pointer;
+  transition: background-color 0.25s ease, border-color 0.25s ease;
+}
+
+.shareBtn:hover {
+  background: var(--tone-bg);
+  border-color: var(--tone-solid);
+}
+
+.more {
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+
+.notFound {
+  min-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  text-align: center;
+  padding: 2rem;
+}
+
+@media (max-width: 960px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .aside {
+    position: relative;
+    top: 0;
+    max-width: 480px;
+  }
+
+  .wrap .mobileBar {
+    display: flex;
+  }
+
+  .wrap {
+    padding-bottom: 8rem;
+  }
+}
+
+/* Mobile-only bottom bar so the booking action is always one tap away */
+.mobileBar {
+  position: fixed;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 0.6rem 0.6rem 1.25rem;
+  border-radius: 999px;
+  background: rgba(42, 26, 31, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: white;
+  box-shadow: var(--shadow-lg);
+}
+
+.mobileBarInfo {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+  min-width: 0;
+}
+
+.mobileBarInfo strong {
+  font-size: 0.95rem;
+}
+
+.mobileBarInfo span {
+  font-size: 0.75rem;
+  opacity: 0.7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mobileBar :global(.btn) {
+  padding: 0.75rem 1.25rem;
+  box-shadow: none;
+}

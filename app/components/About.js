@@ -1,105 +1,18 @@
 'use client';
 
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
-import { Globe, FlaskConical, Building2, Award, GraduationCap } from 'lucide-react';
-import { useRef } from 'react';
+import Image from 'next/image';
+import { motion, useMotionValue, useSpring } from 'framer-motion';
+import { Globe, FlaskConical, Building2, Award, GraduationCap, Camera } from 'lucide-react';
+import styles from './About.module.css';
 
-// Helper component for Floating Image Hover Effect
-function CardWithHover({ children, imageSrc, className, style, delay = 0 }) {
-    const ref = useRef(null);
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-
-    const mouseXSpring = useSpring(x);
-    const mouseYSpring = useSpring(y);
-
-    const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
-    const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
-
-    const handleMouseMove = (e) => {
-        const rect = ref.current.getBoundingClientRect();
-        const width = rect.width;
-        const height = rect.height;
-        const mouseX = e.clientX - rect.left;
-        const mouseY = e.clientY - rect.top;
-        const xPct = mouseX / width - 0.5;
-        const yPct = mouseY / height - 0.5;
-        x.set(xPct);
-        y.set(yPct);
-    };
-
-    const handleMouseLeave = () => {
-        x.set(0);
-        y.set(0);
-    };
-
-    return (
-        <motion.div
-            ref={ref}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay }}
-            onMouseMove={handleMouseMove}
-            onMouseLeave={handleMouseLeave}
-            style={{ ...style, position: 'relative', overflow: 'visible' }} // Overflow visible for floating image
-            className={className}
-        >
-            <motion.div
-                style={{
-                    rotateX,
-                    rotateY,
-                    transformStyle: "preserve-3d",
-                    height: '100%',
-                    width: '100%'
-                }}
-            >
-                {children}
-            </motion.div>
-
-            {/* Floating Hover Image */}
-            <motion.div
-                style={{
-                    position: 'absolute',
-                    top: 0, left: 0,
-                    width: '120px', height: '120px', // Mini card size
-                    borderRadius: '15px',
-                    backgroundImage: `url(${imageSrc})`,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundColor: 'white', // Fallback
-                    pointerEvents: 'none',
-                    zIndex: 10,
-                    x: useTransform(mouseXSpring, [-0.5, 0.5], ["-50%", "50%"]), // Move opposite to mouse or with mouse?
-                    y: useTransform(mouseYSpring, [-0.5, 0.5], ["-50%", "50%"]),
-                    opacity: x.get() === 0 && y.get() === 0 ? 0 : 1, // Hide when not hovering (roughly)
-                    scale: x.get() === 0 && y.get() === 0 ? 0.5 : 1,
-                    shadow: '0 10px 30px rgba(0,0,0,0.2)',
-                    border: '4px solid white'
-                }}
-                animate={{
-                    opacity: x.get() === 0 && y.get() === 0 ? 0 : 1,
-                    x: x.get() * 200, // Exaggerate movement to follow cursor relative to center? 
-                    // Let's simplified: This specific logic is tricky without direct mouse coordinates.
-                }}
-                // We will use a simpler "Cursor Follower" approach in a v2 if strict following is needed.
-                // For now, this tilt effect + conditional visibility is the "3D" base, 
-                // but let's implement the specific "Follow Pointer" requested.
-            />
-            {/* 
-               Better implementation for "Following Pointer": 
-               The CustomCursor logic is better for global following. 
-               Here we can use a simple absolute div that tracks mouse position within the card.
-            */}
-        </motion.div>
-    );
-}
-
-// Improved version that tracks mouse precisely for the image
-function FloatingImageCard({ children, imageSrc, className, style, delay = 0, isLight = false }) {
+// Card that reveals a floating photo which follows the pointer
+function FloatingImageCard({ children, imageSrc, className, delay = 0, isLight = false }) {
   const x = useMotionValue(0);
   const y = useMotionValue(0);
   const opacity = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 300, damping: 28 });
+  const springY = useSpring(y, { stiffness: 300, damping: 28 });
+  const scale = useSpring(opacity, { stiffness: 260, damping: 20 });
 
   const handleMouseMove = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -114,235 +27,196 @@ function FloatingImageCard({ children, imageSrc, className, style, delay = 0, is
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
+      initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay }}
+      viewport={{ once: true, margin: '-60px' }}
+      transition={{ delay, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+      whileHover={{ y: -4, transition: { duration: 0.4 } }}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ ...style, position: 'relative', overflow: 'hidden' }} // Keep overflow hidden for the card content, but we need visible for the image? No, image is inside.
-      className={className}
-      data-cursor-light={isLight} // Cursor helper
+      className={`${styles.card} ${className || ''}`}
+      data-cursor-light={isLight}
     >
       {children}
-      
+
+      <span className={styles.photoHint} aria-hidden="true"><Camera size={14} /></span>
+
       {/* The Floating Mini-Card */}
       <motion.div
+        aria-hidden="true"
+        className={styles.floatingPhoto}
         style={{
-          position: 'absolute',
-          top: 0, left: 0, // start at top-left
-          x, y, // follow mouse
-          translateX: '10px', // Offset
-          translateY: '10px',
-          width: '100px',
-          height: '100px',
-          borderRadius: '12px',
-          backgroundColor: 'white',
+          x: springX,
+          y: springY,
+          opacity,
+          scale,
           backgroundImage: `url(${imageSrc})`,
-          backgroundSize: 'cover',
-          backgroundPosition: 'center',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
-          pointerEvents: 'none',
-          zIndex: 20,
-          opacity: opacity,
-          scale: opacity
         }}
-        transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
       />
     </motion.div>
   );
 }
 
+const INTERESTS = [
+  "Educación Alimentaria y Nutricional",
+  "Salud Pública",
+  "Salud Global y Planetaria",
+  "Política alimentaria",
+  "Inocuidad de los alimentos",
+  "Exposoma social",
+  "Enfermedades cardiometabólicas",
+  "Epidemiología y bioestadística",
+  "Curso de vida",
+  "Escritura académica",
+];
+
+const CARDS = [
+  {
+    tone: 'sage',
+    image: '/images/about/global-shaper.jpg',
+    icon: Globe,
+    kicker: 'Comunidad global',
+    title: 'Global Shaper',
+    text: 'World Economic Forum · Hub Medellín',
+    className: 'span5',
+  },
+  {
+    tone: 'peach',
+    image: '/images/about/ces-lab.jpg',
+    icon: FlaskConical,
+    kicker: 'Innovación',
+    title: 'Co-fundadora de Ideaslab',
+    text: 'Laboratorio de innovación en Educación Alimentaria y Nutricional · Universidad CES',
+    className: 'span5',
+  },
+  {
+    tone: 'butter',
+    image: '/images/about/san-rafael.jpg',
+    icon: Building2,
+    kicker: 'Impacto público',
+    title: 'Alcaldía de Medellín',
+    text: 'Proyectos con la Alcaldía, y proyectos rurales con la Fundación Aurelio Llano Posada y la E.S.E Hospital San Rafael de Yolombó.',
+    className: 'span4',
+  },
+  {
+    tone: 'lilac',
+    image: '/images/about/liderazgo.jpg',
+    icon: Award,
+    kicker: 'Liderazgo público',
+    title: 'Referentes',
+    text: 'Diplomado Referentes (Universidad EIA – Alcaldía de Medellín) y Diplomado en Salud Pública.',
+    className: 'span4',
+  },
+  {
+    tone: 'sky',
+    image: '/images/about/medellin.jpg',
+    icon: GraduationCap,
+    kicker: 'Investigación',
+    title: 'Investigadora',
+    text: 'Cofundadora y miembro activo del grupo de investigación Exposomas del Imperial College – CES y universidades del exterior.',
+    className: 'span4',
+  },
+];
 
 export default function About() {
   return (
-    <section id="about" className="section-padding" style={{ backgroundColor: '#FFFBF5', paddingBottom: '6rem' }}>
+    <section id="about" className={`section-padding ${styles.section}`}>
       <div className="container">
-        <motion.div 
+        <div className={styles.head}>
+          <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            style={{ marginBottom: '4rem', textAlign: 'center' }}
-        >
-          <span style={{ 
-             fontFamily: 'var(--font-heading)', 
-             color: 'var(--color-primary)', 
-             fontSize: '1.2rem',
-             marginBottom: '1rem', display: 'block'
-          }}>
-            Conoce a Manuela Acevedo
-          </span>
-          <h2 style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>Más que una Nutri 🦦</h2>
-          <p style={{ opacity: 0.6, fontSize: '0.9rem' }}>
-            Investigación Social y Clínica, Investigación en Educación Alimentaria y Nutricional, apasionada por la Educación Alimentaria y Nutricional, Salud Pública, Salud Global y Salud Planetaria; proyectos de política alimentaria e inocuidad de los alimentos; exposoma social y mecanismos de enfermedades cardio metabólicas, epidemiología y bioestadística; enfoques del curso de vida; y escritura académica.
-          </p>
-        </motion.div>
+            transition={{ duration: 0.7 }}
+          >
+            <span className="eyebrow">Conoce a Manuela Acevedo</span>
+            <h2 className={styles.title}>
+              Más que una <span style={{ whiteSpace: 'nowrap' }}><span className="serif-accent">nutri</span> 🦦</span>
+            </h2>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.15 }}
+          >
+            <p className="lead">
+              Investigación social y clínica con un pie en la consulta y otro en la comunidad.
+              Estos son los temas que me apasionan:
+            </p>
+            <motion.ul
+              className={styles.interests}
+              initial="hidden"
+              whileInView="show"
+              viewport={{ once: true }}
+              variants={{ show: { transition: { staggerChildren: 0.04, delayChildren: 0.3 } } }}
+            >
+              {INTERESTS.map((topic) => (
+                <motion.li
+                  key={topic}
+                  variants={{ hidden: { opacity: 0, scale: 0.8 }, show: { opacity: 1, scale: 1 } }}
+                  whileHover={{ y: -3, rotate: -2 }}
+                >
+                  {topic}
+                </motion.li>
+              ))}
+            </motion.ul>
+          </motion.div>
+        </div>
 
         {/* Bento Grid Layout */}
-        <div style={{ 
-            display: 'grid', 
-            gridTemplateColumns: 'repeat(12, 1fr)', 
-            gridAutoRows: 'minmax(250px, auto)', // Height increased slightly
-            gap: '1.5rem'
-        }}>
-            
-            {/* Main Bio Card - Large */}
-            <FloatingImageCard 
-                imageSrc="/images/about/main-bio.jpg"
-                isLight={true}
-                style={{ 
-                    gridColumn: 'span 8',
-                    gridRow: 'span 2',
-                    backgroundColor: '#E86A92', 
-                    borderRadius: '30px',
-                    padding: '3rem',
-                    color: 'white',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'center'
-                }}
-                className="bento-card-main"
+        <div className={styles.bento}>
+          {/* Main Bio Card - Large */}
+          <FloatingImageCard
+            imageSrc="/images/about/main-bio.jpg"
+            isLight={true}
+            className={styles.mainCard}
+          >
+            <div className={styles.mainGlow} aria-hidden="true" />
+            <div className={styles.mainGlow2} aria-hidden="true" />
+
+            <div className={styles.bioContent}>
+              <div className={styles.portrait}>
+                <Image
+                  src="/images/about/main-bio.jpg"
+                  alt="Manuela Acevedo"
+                  fill
+                  sizes="170px"
+                  style={{ objectFit: 'cover', objectPosition: '50% 15%' }}
+                />
+              </div>
+              <div>
+                <span className={styles.mainKicker}>Nutricionista Dietista</span>
+                <h3 className={styles.mainTitle}>
+                  Nutrición con <em>ciencia</em> y <em>corazón</em>
+                </h3>
+                <p className={styles.mainText}>
+                  Creo firmemente que comer saludable debe ser un placer.
+                  Mi enfoque une la evidencia científica con el disfrute de la vida.
+                </p>
+                <p className={styles.signature}>— Manuela Acevedo Álvarez</p>
+              </div>
+            </div>
+          </FloatingImageCard>
+
+          {CARDS.map(({ tone, image, icon: Icon, kicker, title, text, className }, i) => (
+            <FloatingImageCard
+              key={title}
+              imageSrc={image}
+              delay={0.08 * (i + 1)}
+              className={`${styles[tone]} ${styles[className]}`}
             >
-                 <div style={{
-                     position: 'absolute', top: '-50px', right: '-50px',
-                     width: '300px', height: '300px',
-                     backgroundColor: 'rgba(255,255,255,0.1)',
-                     borderRadius: '50%'
-                 }} />
-
-                 <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', zIndex: 1 }} className="bio-content">
-                     {/* Photo Persistent */}
-                     <div style={{ 
-                         minWidth: '160px', height: '160px', 
-                         borderRadius: '50%', backgroundColor: 'white',
-                         border: '4px solid white', 
-                         backgroundImage: 'url(/images/about/main-bio.jpg)',
-                         backgroundSize: 'cover', backgroundPosition: 'center',
-                         boxShadow: '0 10px 20px rgba(0,0,0,0.1)'
-                     }} />
-                     <div>
-                        <h3 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
-                            Nutrición con Ciencia y Corazón
-                        </h3>
-                        <p style={{ fontSize: '1.2rem', lineHeight: '1.6', opacity: 0.95 }}>
-                            Soy Nutricionista Dietista y creo firmemente que comer saludable debe ser un placer. 
-                            Mi enfoque une la evidencia científica con el disfrute de la vida.
-                        </p>
-                     </div>
-                 </div>
+              <div className={styles.cardTop}>
+                <span className={styles.iconBubble}><Icon size={22} strokeWidth={2} /></span>
+                <span className={styles.kicker}>{kicker}</span>
+              </div>
+              <h4 className={styles.cardTitle}>{title}</h4>
+              <p className={styles.cardText}>{text}</p>
             </FloatingImageCard>
-
-            {/* Global Shaper */}
-            <FloatingImageCard 
-                imageSrc="/images/about/global-shaper.jpg"
-                delay={0.1}
-                style={{ 
-                    gridColumn: 'span 4',
-                    backgroundColor: '#C5E1A5',
-                    borderRadius: '30px',
-                    padding: '2rem',
-                    display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center'
-                }}
-            >
-                <div style={{backgroundColor: 'rgba(255,255,255,0.5)', padding: '1rem', borderRadius: '50%', marginBottom: '1rem' }}>
-                    <Globe size={40} color="#33691E" />
-                </div>
-                <h4 style={{ fontSize: '1.5rem', margin: 0, color: '#33691E' }}>Global Shaper</h4>
-                <p style={{ opacity: 0.8, marginTop: '0.5rem', color: '#33691E' }}>World Economic Forum</p>
-            </FloatingImageCard>
-
-            {/* CES Lab */}
-            <FloatingImageCard 
-                imageSrc="/images/about/ces-lab.jpg"
-                delay={0.2}
-                style={{ 
-                    gridColumn: 'span 4',
-                    backgroundColor: '#FFCCBC', 
-                    borderRadius: '30px',
-                    padding: '2rem',
-                    display: 'flex', flexDirection: 'column', justifyContent: 'center'
-                }}
-            >
-                <FlaskConical size={32} color="#D84315" style={{ marginBottom: '1rem' }} />
-                <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#BF360C' }}>Co-fundadora Laboratorio Ideaslab</h4>
-                <p style={{ opacity: 0.8, marginTop: '0.5rem', color: '#BF360C' }}>Innovación en Educación Alimentaria y Nutricional<br/>Universidad CES</p>
-            </FloatingImageCard>
-
-            {/* Mayor's Office */}
-            <FloatingImageCard 
-                imageSrc="/images/about/san-rafael.jpg"
-                delay={0.3}
-                style={{ 
-                    gridColumn: 'span 4',
-                    backgroundColor: '#CFD8DC', 
-                    borderRadius: '30px',
-                    padding: '2rem',
-                    display: 'flex', flexDirection: 'column', justifyContent: 'center'
-                }}
-            >
-                <Building2 size={32} color="#455A64" style={{ marginBottom: '1rem' }} />
-                <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#37474F' }}>Impacto Público</h4>
-                <p style={{ opacity: 0.8, marginTop: '0.5rem', color: '#37474F' }}><b>Alcaldía de Medellín</b><br/>Desarrollo de proyectos con la alcaldía de Medellín, también en
-proyectos rurales con Fundación Aurelio Llano posada y E.S.E Hospital San Rafael de Yolombó</p>
-            </FloatingImageCard>
-
-             {/* Liderazgo - Updated Colors */}
-             <FloatingImageCard 
-                 imageSrc="/images/about/liderazgo.jpg"
-                 delay={0.4}
-                 style={{ 
-                     gridColumn: 'span 4',
-                     backgroundColor: '#FFAB91', // Darker Peach/Orange for better contrast
-                     borderRadius: '30px',
-                     padding: '2rem',
-                     display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center'
-                 }}
-             >
-                 <Award size={32} color="#BF360C" style={{ marginBottom: '0.5rem' }} />
-                 <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#BF360C' }}>Liderazgo público</h4>
-                 <p style={{ opacity: 0.9, marginTop: '0.5rem', color: '#BF360C', fontWeight: '500' }}>Diplomado Referentes (Universidad EIA – Alcaldía de Medellín) <br/> Diplomado en Salud Pública</p>
-             </FloatingImageCard>
-
-             {/* Liderazgo - Updated Colors */}
-             <FloatingImageCard 
-                 imageSrc="/images/about/liderazgo.jpg"
-                 delay={0.4}
-                 style={{ 
-                     gridColumn: 'span 4',
-                     backgroundColor: '#91b2ffff', // Darker Peach/Orange for better contrast
-                     borderRadius: '30px',
-                     padding: '2rem',
-                     display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center'
-                 }}
-             >
-                 <GraduationCap size={32} color="#BF360C" style={{ marginBottom: '0.5rem' }} />
-                 <h4 style={{ fontSize: '1.4rem', margin: 0, color: '#BF360C' }}>Investigadora</h4>
-                 <p style={{ opacity: 0.9, marginTop: '0.5rem', color: '#BF360C', fontWeight: '500' }}>Cofundadora y miembro activo del grupo de investigación Exposomas del Imperial College - CES y universidades del exterior</p>
-             </FloatingImageCard>
-
+          ))}
         </div>
       </div>
-      
-      <style jsx global>{`
-        @media (max-width: 900px) {
-            .bento-card-main {
-                grid-column: span 12 !important;
-            }
-            div[style*="grid-column: span 4"] {
-                grid-column: span 6 !important;
-            }
-        }
-        @media (max-width: 600px) {
-            div[style*="grid-column: span 4"], 
-            div[style*="grid-column: span 6"] {
-                grid-column: span 12 !important;
-            }
-            .bento-card-main .bio-content {
-                flex-direction: column;
-                text-align: center;
-            }
-        }
-      `}</style>
     </section>
   );
 }
