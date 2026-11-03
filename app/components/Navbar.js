@@ -69,7 +69,7 @@ export default function Navbar() {
     >
       <div className="container">
         <div className={styles.bar}>
-          <Link href="/" className={styles.logo} aria-label="NutriNuelita, inicio">
+          <Link href="/" className={styles.logo} aria-label="Nutrinuelita, inicio">
             <motion.span
               className={styles.logoMark}
               whileHover={{ rotate: [0, -14, 10, -6, 0] }}
@@ -77,7 +77,7 @@ export default function Navbar() {
             >
               🦦
             </motion.span>
-            <span>NutriNuelita</span>
+            <span>Nutrinuelita</span>
           </Link>
 
           <nav className={styles.desktopNav} aria-label="Principal">

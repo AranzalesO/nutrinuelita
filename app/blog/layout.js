@@ -1,7 +1,7 @@
 export const metadata = {
   title: {
-    absolute: "Blog de nutrición y bienestar | NutriNuelita · Manuela Acevedo",
-    template: "%s | NutriNuelita · Manuela Acevedo",
+    absolute: "Blog de nutrición y bienestar | Nutrinuelita · Manuela Acevedo",
+    template: "%s | Nutrinuelita · Manuela Acevedo",
   },
   description:
     "Artículos de nutrición basados en evidencia escritos por Manuela Acevedo Álvarez, Nutricionista Dietista: digestión, sueño, alimentación consciente y hábitos saludables.",

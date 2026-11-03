@@ -39,7 +39,7 @@ export default function EventosPage() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
         >
-          Agenda NutriNuelita
+          Agenda Nutrinuelita
         </motion.span>
         <motion.h1
           className={page.title}

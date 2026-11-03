@@ -77,7 +77,7 @@ export function registrationHref(event) {
 }
 
 export function talkRequestHref() {
-  const subject = "Quiero una charla de NutriNuelita";
+  const subject = "Quiero una charla de Nutrinuelita";
   const body =
     "¡Hola Manuela! Me gustaría llevar una charla/taller a:\n\nOrganización:\nTema de interés:\nNúmero aproximado de asistentes:\nFecha tentativa:\n";
   return `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
@@ -89,7 +89,7 @@ export function googleCalendarHref(event) {
   const end = event.end || new Date(new Date(event.start).getTime() + 60 * 60 * 1000).toISOString();
   const params = new URLSearchParams({
     action: "TEMPLATE",
-    text: `${event.title} · NutriNuelita`,
+    text: `${event.title} · Nutrinuelita`,
     dates: `${stamp(event.start)}/${stamp(end)}`,
     details: event.summary || "",
     location: [event.location, event.city].filter(Boolean).join(", "),

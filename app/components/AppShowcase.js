@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Check, Bell, ArrowRight, Home, BookOpen, ShoppingBasket, User } from "lucide-react";
 import styles from "./AppShowcase.module.css";
 
-const WAITLIST_HREF = `mailto:nutrinuelita@gmail.com?subject=${encodeURIComponent('Lista de espera · App NutriNuelita')}&body=${encodeURIComponent('¡Hola! Quiero enterarme cuando la app esté disponible 🦦')}`;
+const WAITLIST_HREF = `mailto:nutrinuelita@gmail.com?subject=${encodeURIComponent('Lista de espera · App Nutrinuelita')}&body=${encodeURIComponent('¡Hola! Quiero enterarme cuando la app esté disponible 🦦')}`;
 
 const MEALS = [
   { emoji: '🥣', name: 'Bowl de avena y berries', time: 'Desayuno', done: true, color: '#FDE4EA' },

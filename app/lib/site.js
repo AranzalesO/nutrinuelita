@@ -2,7 +2,7 @@
 // NEXT_PUBLIC_SITE_URL lets a preview deploy point somewhere else; production uses the real domain.
 export const SITE_URL = (process.env.NEXT_PUBLIC_SITE_URL || "https://nutrinuelita.com").replace(/\/$/, "");
 
-export const SITE_NAME = "NutriNuelita";
+export const SITE_NAME = "Nutrinuelita";
 
 export const PERSON = {
   name: "Manuela Acevedo Álvarez",
@@ -22,7 +22,7 @@ export const SOCIAL = {
 export const BOOKING_URL = "https://calendar.app.google/bCFxLUv3dstFdmkT6";
 
 export const DEFAULT_DESCRIPTION =
-  "Manuela Acevedo Álvarez, Nutricionista Dietista en Medellín y creadora de NutriNuelita. Consulta nutricional personalizada, educación alimentaria, nutrición corporativa, charlas y talleres. Ciencia y amor, sin dietas locas.";
+  "Manuela Acevedo Álvarez, Nutricionista Dietista en Medellín y creadora de Nutrinuelita. Consulta nutricional personalizada, educación alimentaria, nutrición corporativa, charlas y talleres. Ciencia y amor, sin dietas locas.";
 
 // Compact references for other schema blocks (author, organizer…)
 export const personRef = () => ({ "@type": "Person", "@id": `${SITE_URL}/#manuela`, name: PERSON.name, url: SITE_URL, sameAs: [SOCIAL.linkedin, SOCIAL.instagram] });
@@ -30,7 +30,7 @@ export const businessRef = () => ({ "@type": "Organization", "@id": `${SITE_URL}
 
 export const absoluteUrl = (path = "/") => `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 
-// JSON-LD @graph shared by every page: who Manuela is, what NutriNuelita is, and the website
+// JSON-LD @graph shared by every page: who Manuela is, what Nutrinuelita is, and the website
 export function siteJsonLd() {
   const personId = `${SITE_URL}/#manuela`;
   const businessId = `${SITE_URL}/#nutrinuelita`;
@@ -41,7 +41,7 @@ export function siteJsonLd() {
         "@type": "Person",
         "@id": personId,
         name: PERSON.name,
-        alternateName: [PERSON.shortName, "Manuela Acevedo Alvarez", PERSON.nickname, "NutriNuelita"],
+        alternateName: [PERSON.shortName, "Manuela Acevedo Alvarez", PERSON.nickname, "Nutrinuelita"],
         givenName: "Manuela",
         familyName: "Acevedo Álvarez",
         jobTitle: PERSON.jobTitle,
@@ -66,7 +66,7 @@ export function siteJsonLd() {
         "@type": ["ProfessionalService", "Organization"],
         "@id": businessId,
         name: SITE_NAME,
-        alternateName: ["Nutri Nuelita", "NutriNuelita · Manuela Acevedo"],
+        alternateName: ["Nutri Nuelita", "Nutrinuelita · Manuela Acevedo"],
         description: DEFAULT_DESCRIPTION,
         url: SITE_URL,
         image: absoluteUrl(PERSON.image),

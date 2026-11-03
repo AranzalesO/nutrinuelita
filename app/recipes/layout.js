@@ -1,10 +1,10 @@
 export const metadata = {
   title: {
-    absolute: "Recetas saludables | NutriNuelita · Manuela Acevedo",
-    template: "%s | NutriNuelita · Manuela Acevedo",
+    absolute: "Recetas saludables | Nutrinuelita · Manuela Acevedo",
+    template: "%s | Nutrinuelita · Manuela Acevedo",
   },
   description:
-    "Recetario saludable de NutriNuelita: desayunos, almuerzos, cenas, snacks y bebidas fáciles, ricas y balanceadas, creadas por la nutricionista Manuela Acevedo Álvarez.",
+    "Recetario saludable de Nutrinuelita: desayunos, almuerzos, cenas, snacks y bebidas fáciles, ricas y balanceadas, creadas por la nutricionista Manuela Acevedo Álvarez.",
   alternates: { canonical: "/recipes" },
   openGraph: { url: "/recipes" },
 };

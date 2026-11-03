@@ -44,7 +44,7 @@ export default function RecipeLayout({ children, params }) {
     recipeCategory: recipe.category,
     recipeCuisine: "Saludable",
     totalTime: isoDuration(recipe.duration),
-    keywords: `${recipe.category}, receta saludable, NutriNuelita`,
+    keywords: `${recipe.category}, receta saludable, Nutrinuelita`,
     recipeIngredient: recipe.ingredients,
     recipeInstructions: (recipe.instructions || []).map((text) => ({ "@type": "HowToStep", text })),
   };

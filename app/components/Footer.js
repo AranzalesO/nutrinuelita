@@ -28,7 +28,7 @@ export default function Footer() {
           <div className={styles.brand}>
             <Link href="/" className={styles.logo}>
               <span className={styles.logoMark}>🦦</span>
-              <span>NutriNuelita</span>
+              <span>Nutrinuelita</span>
             </Link>
             <p className={styles.tagline}>
               Nutrición divertida y colorida para una vida saludable. Sin restricciones, con mucho sabor.
@@ -77,11 +77,11 @@ export default function Footer() {
           viewport={{ once: true }}
           transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
         >
-          NutriNuelita
+          Nutrinuelita
         </motion.div>
 
         <div className={styles.bottom}>
-          <span>© {year} NutriNuelita · Manuela Acevedo Álvarez, Nutricionista Dietista</span>
+          <span>© {year} Nutrinuelita · Manuela Acevedo Álvarez, Nutricionista Dietista</span>
           <span className={styles.made}>Hecho con <Heart size={14} fill="currentColor" /> en Medellín</span>
           <button
             className={styles.toTop}

@@ -28,8 +28,8 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
-    default: "Manuela Acevedo Álvarez · Nutricionista Dietista en Medellín | NutriNuelita",
-    template: "%s | NutriNuelita · Manuela Acevedo",
+    default: "Manuela Acevedo Álvarez · Nutricionista Dietista en Medellín | Nutrinuelita",
+    template: "%s | Nutrinuelita · Manuela Acevedo",
   },
   description: DEFAULT_DESCRIPTION,
   applicationName: SITE_NAME,
@@ -40,7 +40,7 @@ export const metadata = {
     "Manuela Acevedo Álvarez",
     "Manuela Acevedo",
     "Manuela Acevedo nutricionista",
-    "NutriNuelita",
+    "Nutrinuelita",
     "Nutri Nuelita",
     "nutricionista Medellín",
     "nutricionista dietista Medellín",
@@ -57,14 +57,14 @@ export const metadata = {
     locale: "es_CO",
     url: "/",
     siteName: SITE_NAME,
-    title: "Manuela Acevedo Álvarez · Nutricionista Dietista | NutriNuelita",
+    title: "Manuela Acevedo Álvarez · Nutricionista Dietista | Nutrinuelita",
     description:
       "Nutrición con ciencia y amor en Medellín. Planes personalizados, educación real y charlas que transforman tu relación con la comida.",
-    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Manuela Acevedo Álvarez · Nutricionista Dietista en Medellín · NutriNuelita" }],
+    images: [{ url: "/og-image.jpg", width: 1200, height: 630, alt: "Manuela Acevedo Álvarez · Nutricionista Dietista en Medellín · Nutrinuelita" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Manuela Acevedo Álvarez · NutriNuelita",
+    title: "Manuela Acevedo Álvarez · Nutrinuelita",
     description: "Nutricionista Dietista en Medellín. Nutrición con ciencia y amor, sin dietas locas.",
     images: ["/og-image.jpg"],
   },

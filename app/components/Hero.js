@@ -134,7 +134,7 @@ export default function Hero() {
             <motion.div style={{ y: photoY }} className={styles.archInner}>
               <Image
                 src="/images/about/main-bio.jpg"
-                alt="Manuela Acevedo Álvarez, Nutricionista Dietista en Medellín y creadora de NutriNuelita"
+                alt="Manuela Acevedo Álvarez, Nutricionista Dietista en Medellín y creadora de Nutrinuelita"
                 fill
                 priority
                 sizes="(max-width: 900px) 80vw, 440px"

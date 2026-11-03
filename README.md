@@ -1,6 +1,6 @@
-# NutriNuelita 🦦
+# Nutrinuelita 🦦
 
-Bienvenido a **NutriNuelita**, una plataforma web moderna y vibrante diseñada para una nutricionista integral en Medellín. Este proyecto destaca por su diseño fresco, animaciones fluidas y enfoque en la experiencia de usuario.
+Bienvenido a **Nutrinuelita**, una plataforma web moderna y vibrante diseñada para una nutricionista integral en Medellín. Este proyecto destaca por su diseño fresco, animaciones fluidas y enfoque en la experiencia de usuario.
 
 ## 🚀 Tecnologías
 
